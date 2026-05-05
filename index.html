@@ -817,8 +817,7 @@ window.setLiveStream = setLiveStream;
     <script>
         async function carregarClima() {
             // Adicionado forecast_days=1 para pegar apenas as 24 horas de hoje
-            const url = "https://api.open-meteo.com/v1/forecast?latitude=-29.628&longitude=-50.833&hourly=temperature_2m,precipitation&current_weather=true&forecast_days=1";
-
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=-29.628&longitude=-50.833&hourly=temperature_2m,precipitation&current_weather=true&forecast_days=1&timezone=auto";
             try {
                 const res = await fetch(url);
                 const data = await res.json();
