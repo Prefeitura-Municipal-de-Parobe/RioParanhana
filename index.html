@@ -285,6 +285,59 @@ body {
 }
 
 /* ============================================
+   Clima
+   ============================================ */
+
+.weather-container {
+    margin-top: 30px;
+}
+
+.weather-source {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.weather-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 12px;
+    color: #333;
+}
+
+.card h3 {
+    font-size: 28px;
+    margin-top: 5px;
+}
+
+.card-blue {
+    background: #e3edf9;
+    color: #2a5bd7;
+}
+
+.card-green {
+    background: #e3f4ec;
+    color: #1f8f5f;
+}
+
+.card-red {
+    background: #fdeaea;
+    color: #c0392b;
+}
+
+canvas {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+/* ============================================
    FOOTER
    ============================================ */
 
@@ -462,7 +515,7 @@ body {
             </div>
             <div class="video-info">
                 <div class="info-left">
-                    <h1 class="stream-title">Rio Paranhana</h1>
+                    <h1 class="stream-title">Ponte da Divisa de Taquara e Parobé - Rio Paranhana</h1>
                     <p class="stream-subtitle">Secretaria de Administração - Departamento de TI</p>
                 </div>
                 <div class="info-right">
@@ -504,6 +557,32 @@ body {
                 </div>
             </div>
         </div>-->
+
+        <div class="weather-container">
+            <h2>Clima - últimas 24 horas</h2>
+            <p class="weather-source">
+                Fonte dos dados: Open-Meteo (https://open-meteo.com/)
+            </p>
+
+            <div class="weather-cards">
+                <div class="card card-blue">
+                    <p>Temperatura atual</p>
+                    <h3 id="tempAtual">--°C</h3>
+                </div>
+
+                <div class="card card-green">
+                    <p>Mínima (24h)</p>
+                    <h3 id="tempMin">--°C</h3>
+                </div>
+
+                <div class="card card-red">
+                    <p>Máxima (24h)</p>
+                    <h3 id="tempMax">--°C</h3>
+                </div>
+            </div>
+
+            <canvas id="graficoClima"></canvas>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -706,5 +785,80 @@ function setLiveStream(videoId) {
 // Expose function globally for console use
 window.setLiveStream = setLiveStream;
     </script>
+
+    <!--Clima-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        async function carregarClima() {
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=-29.628&longitude=-50.833&hourly=temperature_2m,precipitation&current_weather=true";
+
+            const res = await fetch(url);
+            const data = await res.json();
+            console.log(data)
+
+            const temps = data.hourly.temperature_2m.slice(-24);
+            const chuva = data.hourly.precipitation.slice(-24);
+            const horas = data.hourly.time.slice(-24).map(t => t.substring(11,16));
+
+            const atual = data.current_weather.temperature;
+            const min = Math.min(...temps);
+            const max = Math.max(...temps);
+
+            document.getElementById("tempAtual").textContent = atual + "°C";
+            document.getElementById("tempMin").textContent = min.toFixed(1) + "°C";
+            document.getElementById("tempMax").textContent = max.toFixed(1) + "°C";
+
+            const ctx = document.getElementById("graficoClima");
+
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: horas,
+                    datasets: [
+                        {
+                            label: "Temperatura (°C)",
+                            data: temps,
+                            borderWidth: 3,
+                            tension: 0.4
+                        },
+                        {
+                            label: "Precipitação (mm/h)",
+                            data: chuva,
+                            borderWidth: 2,
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    scales: {
+                        y: {
+                            title: {
+                                display: true,
+                                text: "Temperatura (°C)"
+                            }
+                        },
+                        y1: {
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: "Precipitação (mm/h)"
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        carregarClima();
+        </script>
 </body>
 </html>
