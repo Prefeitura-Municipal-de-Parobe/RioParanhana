@@ -290,17 +290,21 @@ body {
 
 .weather-container {
     margin-top: 30px;
+    padding: 0 15px; /* Adiciona um respiro lateral para telas pequenas */
+    box-sizing: border-box;
 }
 
 .weather-source {
     font-size: 13px;
     color: #666;
     margin-bottom: 20px;
+    word-wrap: break-word; /* Evita que o link da fonte quebre o layout no celular */
 }
 
 .weather-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* Usa auto-fit para criar colunas que se quebram sozinhas quando não há espaço */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 16px;
     margin-bottom: 25px;
 }
@@ -309,11 +313,15 @@ body {
     padding: 20px;
     border-radius: 12px;
     color: #333;
+    /* Garante que o conteúdo fique centralizado em telas menores */
+    text-align: center; 
 }
 
 .card h3 {
-    font-size: 28px;
+    /* Fonte fluida: diminui em telas pequenas, cresce até 28px em telas grandes */
+    font-size: clamp(20px, 6vw, 28px);
     margin-top: 5px;
+    white-space: nowrap; /* Evita que a temperatura quebre em duas linhas */
 }
 
 .card-blue {
@@ -335,6 +343,23 @@ canvas {
     background: #fff;
     border-radius: 12px;
     padding: 10px;
+    /* Força o gráfico a ocupar 100% da largura disponível */
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px; /* Limita a altura em telas muito grandes para não esticar */
+}
+
+/* Ajustes finos para telas muito pequenas (celulares) */
+@media (max-width: 480px) {
+    .weather-container h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    .weather-cards {
+        /* Se a tela for muito fina, garante que cada card ocupe uma linha inteira */
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ============================================
@@ -506,7 +531,7 @@ canvas {
             <div class="video-wrapper">
                 <iframe 
                     id="youtubePlayer"
-                    src="https://www.youtube.com/embed/B1S_kvqb8FM?si=ECYMZGEQxv2Vz0NV"
+                    src="https://www.youtube.com/embed/6dp-bvQ7RWo?si=_nlYz2johQ1JIxDl"
                     title="Transmissão Ao Vivo - Prefeitura de Parobé"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -515,7 +540,7 @@ canvas {
             </div>
             <div class="video-info">
                 <div class="info-left">
-                    <h1 class="stream-title">Ponte da Divisa de Taquara e Parobé - Rio Paranhana</h1>
+                    <h1 class="stream-title">Ponte da Divisa de Parobé e Taquara - Rio Paranhana</h1>
                     <p class="stream-subtitle">Secretaria de Administração - Departamento de TI</p>
                 </div>
                 <div class="info-right">
@@ -790,75 +815,89 @@ window.setLiveStream = setLiveStream;
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         async function carregarClima() {
-            const url = "https://api.open-meteo.com/v1/forecast?latitude=-29.628&longitude=-50.833&hourly=temperature_2m,precipitation&current_weather=true";
+            // Adicionado forecast_days=1 para pegar apenas as 24 horas de hoje
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=-29.628&longitude=-50.833&hourly=temperature_2m,precipitation&current_weather=true&forecast_days=1";
 
-            const res = await fetch(url);
-            const data = await res.json();
-            console.log(data)
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
 
-            const temps = data.hourly.temperature_2m.slice(-24);
-            const chuva = data.hourly.precipitation.slice(-24);
-            const horas = data.hourly.time.slice(-24).map(t => t.substring(11,16));
+                // Agora o array tem exatamente 24 horas (do início ao fim de hoje)
+                const temps = data.hourly.temperature_2m;
+                const chuva = data.hourly.precipitation;
+                const horas = data.hourly.time.map(t => t.substring(11, 16));
 
-            const atual = data.current_weather.temperature;
-            const min = Math.min(...temps);
-            const max = Math.max(...temps);
+                const atual = data.current_weather.temperature;
+                
+                // Cálculo de Min/Max baseado nas 24h de hoje
+                const min = Math.min(...temps);
+                const max = Math.max(...temps);
 
-            document.getElementById("tempAtual").textContent = atual + "°C";
-            document.getElementById("tempMin").textContent = min.toFixed(1) + "°C";
-            document.getElementById("tempMax").textContent = max.toFixed(1) + "°C";
+                document.getElementById("tempAtual").textContent = atual + "°C";
+                document.getElementById("tempMin").textContent = min.toFixed(1) + "°C";
+                document.getElementById("tempMax").textContent = max.toFixed(1) + "°C";
 
-            const ctx = document.getElementById("graficoClima");
+                const ctx = document.getElementById("graficoClima");
 
-            new Chart(ctx, {
-                type: "line",
-                data: {
-                    labels: horas,
-                    datasets: [
-                        {
-                            label: "Temperatura (°C)",
-                            data: temps,
-                            borderWidth: 3,
-                            tension: 0.4
-                        },
-                        {
-                            label: "Precipitação (mm/h)",
-                            data: chuva,
-                            borderWidth: 2,
-                            tension: 0.4,
-                            yAxisID: 'y1'
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    scales: {
-                        y: {
-                            title: {
-                                display: true,
-                                text: "Temperatura (°C)"
-                            }
-                        },
-                        y1: {
-                            position: 'right',
-                            title: {
-                                display: true,
-                                text: "Precipitação (mm/h)"
+                // Destruir gráfico anterior se existir (evita bugs de sobreposição)
+                if (window.meuGrafico) {
+                    window.meuGrafico.destroy();
+                }
+
+                window.meuGrafico = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: horas,
+                        datasets: [
+                            {
+                                label: "Temperatura (°C)",
+                                data: temps,
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderWidth: 3,
+                                tension: 0.4,
+                                yAxisID: 'y'
                             },
-                            grid: {
-                                drawOnChartArea: false
+                            {
+                                label: "Precipitação (mm/h)",
+                                data: chuva,
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                yAxisID: 'y1'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: { display: true, text: "Temperatura (°C)" }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: { display: true, text: "Precipitação (mm/h)" },
+                                grid: { drawOnChartArea: false }
                             }
                         }
                     }
-                }
-            });
+                });
+            } catch (error) {
+                console.error("Erro ao carregar dados:", error);
+            }
         }
 
         carregarClima();
-        </script>
+    </script>
 </body>
 </html>
