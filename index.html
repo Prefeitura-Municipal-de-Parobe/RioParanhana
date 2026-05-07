@@ -540,18 +540,17 @@ canvas {
         <div class="video-container">
             <div class="video-wrapper">
                 <iframe 
-                    id="youtubePlayer"
-                    src="https://www.youtube.com/embed/6dp-bvQ7RWo?si=_nlYz2johQ1JIxDl&controls=0&modestbranding=1&rel=0"
-                    title="Transmissão Ao Vivo - Prefeitura de Parobé"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    id="youtubePlayer" 
+                    src="https://www.youtube.com/embed/bt2n9o0JZhs?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0" 
+                    title="Transmissão Ao Vivo - Prefeitura de Parobé" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                     allowfullscreen>
                 </iframe>
             </div>
             <div class="video-info">
                 <div class="info-left">
                     <h1 class="stream-title">Ponte da Divisa de Parobé e Taquara - Rio Paranhana</h1>
-                    <p class="stream-subtitle">Secretaria de Administração - Departamento de TI</p>
                 </div>
                 <div class="info-right">
                     <div class="viewer-count" id="viewerCount">
@@ -592,7 +591,53 @@ canvas {
                 </div>
             </div>
         </div>-->
+<!-- Bloco Informativo - Início -->
+<section style="background: white; border-radius: 16px; padding: 30px; margin: 24px 0; border: 1px solid #e9ecef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
+    
+    <div style="display: flex; align-items: center; gap: 12px; color: #e53e3e; margin-bottom: 20px; border-bottom: 2px solid #f8f9fa; padding-bottom: 15px;">
+        <i data-lucide="alert-circle" style="width: 28px; height: 28px;"></i>
+        <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">ACOMPANHAMENTO EM TEMPO REAL – RIO PARANHANA</h2>
+    </div>
 
+    <p style="color: #495057; line-height: 1.8; font-size: 15px; margin-bottom: 25px;">
+        Esta transmissão tem como objetivo fornecer imagens ao vivo 24h do Rio Paranhana, especificamente na região da ponte que liga as cidades de <strong>Parobé e Taquara</strong>. Este é um serviço de utilidade pública para auxiliar a comunidade, motoristas e órgãos de segurança no acompanhamento do nível das águas e das condições climáticas locais.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+        
+        <!-- Localização -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="map-pin" style="width: 18px;"></i> Localização e Horário
+            </h3>
+            <p style="font-size: 14px; color: #666; margin: 0;">📍 <strong>Local:</strong> Ponte sobre o Rio Paranhana</p>
+            <p style="font-size: 14px; color: #666; margin: 0;">🕒 <strong>Transmissão:</strong> 24h / 7 dias por semana</p>
+        </div>
+
+        <!-- Avisos Técnicos -->
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="shield-check" style="width: 18px;"></i> Informações Importantes
+            </h3>
+            <p style="font-size: 13px; color: #777; margin: 0; line-height: 1.4;">
+                As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas oficiais, consulte sempre a <strong>Defesa Civil</strong>.
+            </p>
+        </div>
+
+        <!-- Contatos de Emergência -->
+        <div style="background: #fff5f5; padding: 15px; border-radius: 12px; border: 1px solid #feb2b2;">
+            <h3 style="font-size: 14px; color: #e53e3e; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                <i data-lucide="phone-forwarded" style="width: 18px;"></i> Emergência
+            </h3>
+            <div style="font-size: 14px; color: #c53030; display: flex; flex-direction: column; gap: 4px;">
+                <span><strong>Defesa Civil:</strong> (51) 99138-4714</span>
+                <span><strong>Bombeiros:</strong> 193 | <strong>Brigada:</strong> 190</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Bloco Informativo - Fim -->
         <div class="weather-container">
             <h2>Clima - últimas 24 horas</h2>
             <p class="weather-source">
@@ -628,7 +673,6 @@ canvas {
             </div>
             <div class="footer-text">
                 <p class="footer-dev">Desenvolvido pelo Departamento de TI</p>
-                <p class="footer-dev"> Secretaria de Administração — Departamento de TI</p>
                 <p class="footer-dev"> Contato: <a href="mailto:contato@parobe.rs.gov.br">contato@parobe.rs.gov.br</a></p>
             </div>
         </div>
