@@ -5,524 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parobé - Rio Paranhana - Ao Vivo</title>
     <link rel="icon" href="./img/brasao.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">]
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./css/style.css"/>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-/* ============================================
-   PAROBÉ AO VIVO - ESTILOS
-   ============================================ */
-
-:root {
-    --primary: #50A2FF;
-    --primary-dark: #0057af;
-    --primary-light: #0076c0;
-    --accent: #f0c040;
-    --white: #ffffff;
-    --gray-50: #f8f9fa;
-    --gray-100: #f1f3f5;
-    --gray-200: #e9ecef;
-    --gray-300: #dee2e6;
-    --gray-400: #ced4da;
-    --gray-500: #adb5bd;
-    --gray-600: #868e96;
-    --gray-700: #495057;
-    --gray-800: #343a40;
-    --gray-900: #212529;
-    --red-live: #e53e3e;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
-    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-    --shadow-xl: 0 16px 50px rgba(0,0,0,0.15);
-    --radius: 12px;
-    --radius-lg: 16px;
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--gray-50);
-    color: var(--gray-800);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-
-.header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: var(--white);
-    padding: 0;
-    top: 0;
-    z-index: 1000;
-    box-shadow: var(--shadow-lg);
-}
-
-.header-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.logo-img {
-    width: 200px;
-    object-fit: cover;
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
-
-.logo-prefeitura {
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    opacity: 0.85;
-}
-
-.logo-cidade {
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.live-badge {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--red-live);
-    color: var(--white);
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    animation: livePulse 2s ease-in-out infinite;
-    box-shadow: 0 0 20px rgba(229, 62, 62, 0.4);
-}
-
-.live-dot {
-    width: 8px;
-    height: 8px;
-    background: var(--white);
-    border-radius: 50%;
-    animation: dotBlink 1.5s ease-in-out infinite;
-}
-
-@keyframes livePulse {
-    0%, 100% { box-shadow: 0 0 15px rgba(229, 62, 62, 0.3); }
-    50% { box-shadow: 0 0 30px rgba(229, 62, 62, 0.6); }
-}
-
-@keyframes dotBlink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-/* ============================================
-   MAIN CONTENT
-   ============================================ */
-
-.main-content {
-    flex: 1;
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 32px 24px;
-}
-
-/* ============================================
-   VIDEO CONTAINER
-   ============================================ */
-
-.video-container {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-xl);
-    border: 1px solid var(--gray-200);
-}
-
-.video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* 16:9 */
-    background: var(--gray-900);
-    overflow: hidden;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-.video-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    border-top: 3px solid var(--primary);
-    background: linear-gradient(to right, var(--white), var(--gray-50));
-}
-
-.info-left {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.stream-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--primary-dark);
-    letter-spacing: -0.3px;
-}
-
-.stream-subtitle {
-    font-size: 14px;
-    color: var(--gray-600);
-    font-weight: 400;
-}
-
-.info-right {
-    display: flex;
-    align-items: center;
-}
-
-.viewer-count {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--gray-100);
-    padding: 8px 16px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--gray-700);
-}
-
-/* ============================================
-   INFO CARDS
-   ============================================ */
-
-.info-section {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 24px;
-}
-
-.info-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    box-shadow: var(--shadow-sm);
-    border: 1px solid var(--gray-200);
-    transition: var(--transition);
-}
-
-.info-card:hover {
-    box-shadow: var(--shadow-md);
-    border-color: var(--primary);
-    transform: translateY(-2px);
-}
-
-.card-icon {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-}
-
-.card-content h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--primary-dark);
-    margin-bottom: 4px;
-}
-
-.card-content p {
-    font-size: 13px;
-    color: var(--gray-600);
-    line-height: 1.5;
-}
-
-/* ============================================
-   Clima
-   ============================================ */
-
-.weather-container {
-    margin-top: 30px;
-    padding: 0 15px; /* Adiciona um respiro lateral para telas pequenas */
-    box-sizing: border-box;
-}
-
-.weather-source {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 20px;
-    word-wrap: break-word; /* Evita que o link da fonte quebre o layout no celular */
-}
-
-.weather-cards {
-    display: grid;
-    /* Usa auto-fit para criar colunas que se quebram sozinhas quando não há espaço */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    margin-bottom: 25px;
-}
-
-.card {
-    padding: 20px;
-    border-radius: 12px;
-    color: #333;
-    /* Garante que o conteúdo fique centralizado em telas menores */
-    text-align: center; 
-}
-
-.card h3 {
-    /* Fonte fluida: diminui em telas pequenas, cresce até 28px em telas grandes */
-    font-size: clamp(20px, 6vw, 28px);
-    margin-top: 5px;
-    white-space: nowrap; /* Evita que a temperatura quebre em duas linhas */
-}
-
-.card-blue {
-    background: #e3edf9;
-    color: #2a5bd7;
-}
-
-.card-green {
-    background: #e3f4ec;
-    color: #1f8f5f;
-}
-
-.card-red {
-    background: #fdeaea;
-    color: #c0392b;
-}
-
-canvas {
-    background: #fff;
-    border-radius: 12px;
-    padding: 10px;
-    /* Força o gráfico a ocupar 100% da largura disponível */
-    width: 100% !important;
-    height: auto !important;
-    max-height: 400px; /* Limita a altura em telas muito grandes para não esticar */
-}
-
-/* Ajustes finos para telas muito pequenas (celulares) */
-@media (max-width: 480px) {
-    .weather-container h2 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-    
-    .weather-cards {
-        /* Se a tela for muito fina, garante que cada card ocupe uma linha inteira */
-        grid-template-columns: 1fr;
-    }
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-
-.footer {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-    color: var(--white);
-    margin-top: auto;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px 24px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.footer-logo {
-    margin-bottom: 4px;
-}
-
-.footer-logo-img {
-    width: 200px;
-    object-fit: cover;
-}
-
-.footer-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.footer-main {
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-}
-
-.footer-sub {
-    font-size: 14px;
-    font-weight: 500;
-    opacity: 0.9;
-}
-
-.footer-dev {
-    font-size: 12px;
-    opacity: 0.7;
-    margin-top: 4px;
-    font-style: italic;
-}
-
-.footer-dev > a {
-    text-decoration: none;
-    color: var(--white);
-}
-
-.footer-dev > a:hover {
-    font-weight: bold;
-}
-
-.footer-bottom {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    width: 100%;
-}
-
-.footer-bottom p {
-    font-size: 12px;
-    opacity: 0.5;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-
-@media (max-width: 768px) {
-    .header-content {
-        padding: 12px 16px;
-    }
-
-    .logo-img {
-        width: 150px;
-    }
-
-    .logo-prefeitura {
-        font-size: 9px;
-    }
-
-    .logo-cidade {
-        font-size: 18px;
-    }
-
-    .live-badge {
-        padding: 5px 12px;
-        font-size: 10px;
-    }
-
-    .main-content {
-        padding: 16px 12px;
-    }
-
-    .video-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 16px;
-    }
-
-    .stream-title {
-        font-size: 16px;
-    }
-
-    .stream-subtitle {
-        font-size: 13px;
-    }
-
-    .info-section {
-        grid-template-columns: 1fr;
-        gap: 12px;
-        margin-top: 16px;
-    }
-
-    .info-card {
-        padding: 18px;
-    }
-
-    .footer-content {
-        padding: 28px 16px 14px;
-    }
-
-    .footer-main {
-        font-size: 16px;
-    }
-
-    .footer-sub {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 380px) {
-    .logo-text {
-        display: none;
-    }
-
-    .live-badge span:not(.live-dot) {
-        display: none;
-    }
-
-    .live-badge {
-        padding: 8px;
-    }
-}
-    </style>
 </head>
 <body>
-    <!-- Header -->
+
     <header class="header">
         <div class="header-content">
             <div class="logo-container">
@@ -535,7 +24,6 @@ canvas {
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="video-container">
             <div class="video-wrapper">
@@ -552,16 +40,15 @@ canvas {
                 <div class="info-left">
                     <h1 class="stream-title">Ponte da Divisa de Parobé e Taquara - Rio Paranhana</h1>
                 </div>
-                <div class="info-right">
+                <!--<div class="info-right">
                     <div class="viewer-count" id="viewerCount">
                         <i data-lucide="eye" style="width:18px;height:18px;"></i>
                         <span id="viewers">--</span>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
 
-        <!-- Schedule / Info Section -->
         <!--<div class="info-section">
             <div class="info-card">
                 <div class="card-icon">
@@ -591,53 +78,54 @@ canvas {
                 </div>
             </div>
         </div>-->
-<!-- Bloco Informativo - Início -->
-<section style="background: white; border-radius: 16px; padding: 30px; margin: 24px 0; border: 1px solid #e9ecef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
-    
-    <div style="display: flex; align-items: center; gap: 12px; color: #e53e3e; margin-bottom: 20px; border-bottom: 2px solid #f8f9fa; padding-bottom: 15px;">
-        <i data-lucide="alert-circle" style="width: 28px; height: 28px;"></i>
-        <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">ACOMPANHAMENTO EM TEMPO REAL – RIO PARANHANA</h2>
-    </div>
 
-    <p style="color: #495057; line-height: 1.8; font-size: 15px; margin-bottom: 25px;">
-        Esta transmissão tem como objetivo fornecer imagens ao vivo 24h do Rio Paranhana, especificamente na região da ponte que liga as cidades de <strong>Parobé e Taquara</strong>. Este é um serviço de utilidade pública para auxiliar a comunidade, motoristas e órgãos de segurança no acompanhamento do nível das águas e das condições climáticas locais.
-    </p>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-        
-        <!-- Localização -->
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="map-pin" style="width: 18px;"></i> Localização e Horário
-            </h3>
-            <p style="font-size: 14px; color: #666; margin: 0;">📍 <strong>Local:</strong> Ponte sobre o Rio Paranhana</p>
-            <p style="font-size: 14px; color: #666; margin: 0;">🕒 <strong>Transmissão:</strong> 24h / 7 dias por semana</p>
-        </div>
-
-        <!-- Avisos Técnicos -->
-        <div style="display: flex; flex-direction: column; gap: 8px;">
-            <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="shield-check" style="width: 18px;"></i> Informações Importantes
-            </h3>
-            <p style="font-size: 13px; color: #777; margin: 0; line-height: 1.4;">
-                As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas oficiais, consulte sempre a <strong>Defesa Civil</strong>.
-            </p>
-        </div>
-
-        <!-- Contatos de Emergência -->
-        <div style="background: #fff5f5; padding: 15px; border-radius: 12px; border: 1px solid #feb2b2;">
-            <h3 style="font-size: 14px; color: #e53e3e; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                <i data-lucide="phone-forwarded" style="width: 18px;"></i> Emergência
-            </h3>
-            <div style="font-size: 14px; color: #c53030; display: flex; flex-direction: column; gap: 4px;">
-                <span><strong>Defesa Civil:</strong> (51) 99138-4714</span>
-                <span><strong>Bombeiros:</strong> 193 | <strong>Brigada:</strong> 190</span>
+        <section style="background: white; border-radius: 16px; padding: 30px; margin: 24px 0; border: 1px solid #e9ecef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
+            
+            <div style="display: flex; align-items: center; gap: 12px; color: #e53e3e; margin-bottom: 20px; border-bottom: 2px solid #f8f9fa; padding-bottom: 15px;">
+                <i data-lucide="alert-circle" style="width: 28px; height: 28px;"></i>
+                <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">ACOMPANHAMENTO EM TEMPO REAL – RIO PARANHANA</h2>
             </div>
-        </div>
+            <p style="color: #495057; line-height: 1.8; font-size: 15px; margin-bottom: 25px;">
+                Esta transmissão tem como objetivo fornecer imagens ao vivo 24h do Rio Paranhana, especificamente na região da ponte que liga as cidades de <strong>Parobé e Taquara</strong>. Este é um serviço de utilidade pública para auxiliar a comunidade, motoristas e órgãos de segurança no acompanhamento do nível das águas e das condições climáticas locais.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                
+                <!-- Localização -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="map-pin" style="width: 18px;"></i> Localização e Horário
+                    </h3>
+                    <p style="font-size: 14px; color: #666; margin: 0;">📍 <strong>Local:</strong> Ponte sobre o Rio Paranhana</p>
+                    <p style="font-size: 14px; color: #666; margin: 0;">🕒 <strong>Transmissão:</strong> 24h / 7 dias por semana</p>
+                </div>
 
-    </div>
-</section>
-<!-- Bloco Informativo - Fim -->
+                <!-- Avisos Técnicos -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="shield-check" style="width: 18px;"></i> Informações Importantes
+                    </h3>
+                    <p style="font-size: 13px; color: #777; margin: 0; line-height: 1.4;">
+                        As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas oficiais, consulte sempre a <strong>Defesa Civil</strong>.
+                    </p>
+                </div>
+
+                <!-- Contatos de Emergência -->
+                <div style="background: #fff5f5; padding: 15px; border-radius: 12px; border: 1px solid #feb2b2;">
+                    <h3 style="font-size: 14px; color: #e53e3e; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                        <i data-lucide="phone-forwarded" style="width: 18px;"></i> Emergência
+                    </h3>
+                    <div style="font-size: 14px; color: #c53030; display: flex; flex-direction: column; gap: 4px;">
+                        <span>
+                            <strong>Defesa Civil:</strong>
+                            <a class="whatsapp" href="https://wa.me/51991384714">(51) 99138-4714</a>
+                            <i style="margin-left: 3px; color: rgb(0, 193, 0);" class="bi bi-whatsapp"></i>
+                        </span>
+                        <span><strong>Bombeiros:</strong> 193 | <strong>Brigada:</strong> 190</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="weather-container">
             <h2>Clima - últimas 24 horas</h2>
             <p class="weather-source">
@@ -665,7 +153,6 @@ canvas {
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">
@@ -678,279 +165,10 @@ canvas {
         </div>
     </footer>
 
-    <script>
-/* ============================================
-   PAROBÉ AO VIVO - SCRIPTS
-   ============================================ */
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Lucide icons
-    lucide.createIcons();
-
-    // Set current year
-    const yearEl = document.getElementById('currentYear');
-    if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-    }
-
-    // Simulated viewer count (simulates a live counter)
-    simulateViewers();
-
-    // Handle logo error - show fallback
-    handleLogoErrors();
-
-    // Configure YouTube player
-    configureYouTubePlayer();
-});
-
-/**
- * Simulates a viewer count with realistic fluctuations.
- * In production, this would use the YouTube Data API.
- */
-function simulateViewers() {
-    const viewersEl = document.getElementById('viewers');
-    if (!viewersEl) return;
-
-    let baseViewers = 142;
-    let currentViewers = baseViewers;
-
-    function updateViewers() {
-        // Random fluctuation: -3 to +4
-        const change = Math.floor(Math.random() * 8) - 3;
-        currentViewers = Math.max(50, currentViewers + change);
-        viewersEl.textContent = currentViewers.toLocaleString('pt-BR');
-    }
-
-    // Initial display
-    updateViewers();
-
-    // Update every 5 seconds
-    setInterval(updateViewers, 5000);
-}
-
-/**
- * Shows a text fallback if logo images fail to load.
- */
-function handleLogoErrors() {
-    const logos = [
-        document.getElementById('logoImg'),
-        document.getElementById('footerLogoImg')
-    ];
-
-    logos.forEach(logo => {
-        if (!logo) return;
-
-        logo.addEventListener('error', () => {
-            // Create a text-based fallback
-            const fallback = document.createElement('div');
-            fallback.className = 'logo-fallback';
-            fallback.innerHTML = '🏛️';
-            fallback.style.cssText = `
-                width: ${logo.offsetWidth || 48}px;
-                height: ${logo.offsetHeight || 48}px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-                background: rgba(255,255,255,0.15);
-                border-radius: 50%;
-                border: 2px solid rgba(255,255,255,0.3);
-            `;
-
-            logo.parentNode.replaceChild(fallback, logo);
-        });
-    });
-}
-
-/**
- * Configures the YouTube iframe player.
- * Replace 'LIVE_STREAM_ID' with your actual YouTube Live Stream ID or Video ID.
- */
-function configureYouTubePlayer() {
-    const player = document.getElementById('youtubePlayer');
-    if (!player) return;
-
-    // Get the current src
-    let src = player.getAttribute('src');
-
-    // If the placeholder ID is still there, add a console hint
-    if (src && src.includes('LIVE_STREAM_ID')) {
-        console.info(
-            '%c📋 Parobé Ao Vivo — Para exibir um vídeo, substitua "LIVE_STREAM_ID" no iframe src pelo ID do vídeo/transmissão do YouTube.',
-            'color: #0d3b66; font-size: 14px; font-weight: bold;'
-        );
-
-        // Show a placeholder overlay
-        const wrapper = player.parentElement;
-        const overlay = document.createElement('div');
-        overlay.className = 'stream-placeholder';
-        overlay.innerHTML = `
-            <div style="
-                position: absolute;
-                top: 0; left: 0; right: 0; bottom: 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                background: #50A2FF;
-                color: white;
-                font-family: 'Inter', sans-serif;
-                z-index: 10;
-                gap: 16px;
-                padding: 32px;
-                text-align: center;
-            ">
-                <div style="
-                    width: 80px; height: 80px;
-                    border-radius: 50%;
-                    background: rgba(255,255,255,0.1);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 36px;
-                ">📺</div>
-                <h2 style="
-                    font-size: 24px;
-                    font-weight: 700;
-                    letter-spacing: -0.5px;
-                ">Aguardando Transmissão</h2>
-                <div style="
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    background: rgba(229, 62, 62, 0.8);
-                    padding: 8px 20px;
-                    border-radius: 50px;
-                    font-size: 12px;
-                    font-weight: 700;
-                    letter-spacing: 1.5px;
-                ">
-                    <span style="
-                        width: 8px; height: 8px;
-                        background: white;
-                        border-radius: 50%;
-                        animation: dotBlink 1.5s ease-in-out infinite;
-                    "></span>
-                    EM BREVE
-                </div>
-            </div>
-        `;
-        wrapper.appendChild(overlay);
-    }
-}
-
-/**
- * Utility: Update the YouTube video source dynamically.
- * Call this function with a YouTube video/stream ID to change the stream.
- * 
- * @param {string} videoId - The YouTube video or stream ID
- */
-function setLiveStream(videoId) {
-    const player = document.getElementById('youtubePlayer');
-    if (!player) return;
-
-    const newSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&playsinline=1`;
-    player.setAttribute('src', newSrc);
-
-    // Remove placeholder if exists
-    const placeholder = document.querySelector('.stream-placeholder');
-    if (placeholder) {
-        placeholder.remove();
-    }
-
-    console.info(`%c✅ Transmissão atualizada para: ${videoId}`, 'color: green; font-weight: bold;');
-}
-
-// Expose function globally for console use
-window.setLiveStream = setLiveStream;
-    </script>
-
+    
+    <script src="./js/script.js"></script>
     <!--Clima-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        async function carregarClima() {
-            // Adicionado forecast_days=1 para pegar apenas as 24 horas de hoje
-            const url = "https://api.open-meteo.com/v1/forecast?latitude=-29.628&longitude=-50.833&hourly=temperature_2m,precipitation&current_weather=true&forecast_days=1&timezone=auto";
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-
-                // Agora o array tem exatamente 24 horas (do início ao fim de hoje)
-                const temps = data.hourly.temperature_2m;
-                const chuva = data.hourly.precipitation;
-                const horas = data.hourly.time.map(t => t.substring(11, 16));
-
-                const atual = data.current_weather.temperature;
-                
-                // Cálculo de Min/Max baseado nas 24h de hoje
-                const min = Math.min(...temps);
-                const max = Math.max(...temps);
-
-                document.getElementById("tempAtual").textContent = atual + "°C";
-                document.getElementById("tempMin").textContent = min.toFixed(1) + "°C";
-                document.getElementById("tempMax").textContent = max.toFixed(1) + "°C";
-
-                const ctx = document.getElementById("graficoClima");
-
-                // Destruir gráfico anterior se existir (evita bugs de sobreposição)
-                if (window.meuGrafico) {
-                    window.meuGrafico.destroy();
-                }
-
-                window.meuGrafico = new Chart(ctx, {
-                    type: "line",
-                    data: {
-                        labels: horas,
-                        datasets: [
-                            {
-                                label: "Temperatura (°C)",
-                                data: temps,
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                                borderWidth: 3,
-                                tension: 0.4,
-                                yAxisID: 'y'
-                            },
-                            {
-                                label: "Precipitação (mm/h)",
-                                data: chuva,
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                                borderWidth: 2,
-                                tension: 0.4,
-                                yAxisID: 'y1'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        interaction: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        scales: {
-                            y: {
-                                type: 'linear',
-                                display: true,
-                                position: 'left',
-                                title: { display: true, text: "Temperatura (°C)" }
-                            },
-                            y1: {
-                                type: 'linear',
-                                display: true,
-                                position: 'right',
-                                title: { display: true, text: "Precipitação (mm/h)" },
-                                grid: { drawOnChartArea: false }
-                            }
-                        }
-                    }
-                });
-            } catch (error) {
-                console.error("Erro ao carregar dados:", error);
-            }
-        }
-
-        carregarClima();
-    </script>
+    <script src="./js/clima.js"></script>
 </body>
 </html>
