@@ -184,7 +184,7 @@ body {
 .video-info {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 20px 24px;
     border-top: 3px solid var(--primary);
     background: linear-gradient(to right, var(--white), var(--gray-50));
