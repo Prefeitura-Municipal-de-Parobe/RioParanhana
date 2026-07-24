@@ -38,6 +38,6 @@ const checkRiverTransmission = async () => {
 }
 
 
-//checkRiverTransmission();
+checkRiverTransmission();
 
-//setInterval(checkRiverTransmission, LIVE_CHECK_TIMEOUT);
+setInterval(checkRiverTransmission, LIVE_CHECK_TIMEOUT);
