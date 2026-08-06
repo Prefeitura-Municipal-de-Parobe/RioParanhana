@@ -38,11 +38,9 @@ const mapWeatherData = (riverLevel, weatherSummaryData) => {
 
 async function fetchRiverData() {
   try {
-    const riverLevelResponse = await fetch('/api/rio-proxy.js/?path=river/level');
-    const weatherSummaryResponse = await fetch('/api/rio-proxy.js/?path=weather');
 
-    const riverLevelData = await riverLevelResponse.json();
-    const weatherSummaryData = await weatherSummaryResponse.json();
+    const riverLevelData = await fetch('/api/rio-proxy.js/?path=river/level');
+    const weatherSummaryData = await fetch('/api/rio-proxy.js/?path=weather');
 
     mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData);
     renderizarDadosFluviais(nivelRio, dadosClima);
