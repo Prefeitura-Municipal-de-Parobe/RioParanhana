@@ -38,8 +38,8 @@ const mapWeatherData = (riverLevel, weatherSummaryData) => {
 
 async function fetchRiverData() {
   try {
-    const riverLevelResponse = await fetch('https://apirio.parobe.rs.gov.br:3008/river/level');
-    const weatherSummaryResponse = await fetch('https://apirio.parobe.rs.gov.br:3008/weather');
+    const riverLevelResponse = await fetch('/api/rio-proxy.js/?path=river/level');
+    const weatherSummaryResponse = await fetch('/api/rio-proxy.js/?path=weather');
 
     const riverLevelData = await riverLevelResponse.json();
     const weatherSummaryData = await weatherSummaryResponse.json();
