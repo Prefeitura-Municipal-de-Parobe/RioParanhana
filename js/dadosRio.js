@@ -1,10 +1,9 @@
 const LIVE_CHECK_TIMEOUT = 20 * 60 * 1000;
 
-let dataAtual = new Date()
-let horaAtual = dataAtual.getHours()
-let mesAtual = dataAtual.getMonth() + 1
-let diaAtual = dataAtual.getDate()
-
+let dataAtual = new Date();
+let horaAtual = dataAtual.getHours();
+let mesAtual = dataAtual.getMonth() + 1;
+let diaAtual = dataAtual.getDate();
 
 let dadoFake = 0;
 let nivelRio = 0;
@@ -17,7 +16,6 @@ const dadosClima = {
     chuvaAtual: dadoFake,
     chuvaMaxMes: 300,
     nivelRioMaxGrafico: 6.0,
-
     historicoMeses: [
         { mes: 'Agosto', valor: dadoFake },
         { mes: 'Julho', valor: 200.2 },
@@ -32,29 +30,27 @@ const mapWeatherData = (riverLevel, weatherSummaryData) => {
     dadosClima.veloVento = weatherSummaryData.wind_speed;
     dadosClima.direVento = weatherSummaryData.wind_direction;
     dadosClima.chuvaAtual = weatherSummaryData.rain_volume_month;
-
     nivelRio = riverLevel;
-}
+};
 
 async function fetchRiverData() {
   try {
+    const riverLevelRes = await fetch('/api/rio-proxy?path=river/level');
+    if (!riverLevelRes.ok) throw new Error(`HTTP error! Status: ${riverLevelRes.status}`);
+    const riverLevelData = await riverLevelRes.json();
 
-    const riverLevelData = await fetch('/api/rio-proxy.js/?path=river/level');
-    const weatherSummaryData = await fetch('/api/rio-proxy.js/?path=weather');
+    const weatherSummaryRes = await fetch('/api/rio-proxy?path=weather');
+    if (!weatherSummaryRes.ok) throw new Error(`HTTP error! Status: ${weatherSummaryRes.status}`);
+    const weatherSummaryData = await weatherSummaryRes.json();
 
     mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData);
     renderizarDadosFluviais(nivelRio, dadosClima);
     renderizarGraficos(nivelRio, dadosClima);
-
-    if (!riverLevelResponse.ok) {
-      throw new Error(`HTTP error! Status: ${riverLevelResponse.status}`);
-    }
     
   } catch (error) {
     console.error('Network or parsing error:', error);
   }
 }
-
 
 function addZeroBefore(n) {
     return (n < 10 ? '0' : '') + n;
@@ -69,60 +65,37 @@ function renderizarDadosFluviais(riverLevel, dados) {
 }
 
 function renderizarGraficos(riverLevel, dados) {
-
-    // ==========================================
-    // ==========================================
     let chuvaPercentual = (dados.chuvaAtual / dados.chuvaMaxMes) * 100;
     if (chuvaPercentual > 100) chuvaPercentual = 100;
-    
     
     document.getElementById('api-rain-current-val').innerText = `${dados.chuvaAtual}mm`;
     document.getElementById('api-rain-fill').style.height = `${chuvaPercentual}%`;
     
-
-    // ==========================================
-    // 2. ATUALIZAR RÉGUA DO RIO
-    // ==========================================
     let rioPercentual = (riverLevel * 100) / dados.nivelRioMaxGrafico;
     if (rioPercentual > 100) rioPercentual = 100;
     
     document.getElementById('api-nivel-atual').innerText = riverLevel.toFixed(2);
     document.getElementById('api-river-fill').style.height = `${rioPercentual}%`;
     document.getElementById('api-river-indicator').style.bottom = `calc(${rioPercentual}% - 15px)`;
-    document.getElementById('api-last-update').innerText = `${addZeroBefore(diaAtual)}/${addZeroBefore(mesAtual)}/${dataAtual.getFullYear()}-${addZeroBefore(horaAtual)}:${dataAtual.getMinutes()}`
+    document.getElementById('api-last-update').innerText = `${addZeroBefore(diaAtual)}/${addZeroBefore(mesAtual)}/${dataAtual.getFullYear()}-${addZeroBefore(horaAtual)}:${dataAtual.getMinutes()}`;
     
-    
-    // ==========================================
-    // 3. ATUALIZAR HISTÓRICO DE MESES (NOVO)
-    // ==========================================
-    
-    // Atualiza a palavra "JULHO" (ou o mês atual) dentro do tanque de água
     if (dados.historicoMeses.length > 0) {
-        // Pega o nome do primeiro mês da lista e coloca em maiúsculo, logo após, recorta o nome para apenas 3 caracteres
         document.getElementById('api-rain-month-label').innerText = dados.historicoMeses[0].mes.toUpperCase().substring(0, 3);
-        
         document.getElementById('api-rain-current-val').innerText = `${dados.historicoMeses[0].valor}mm`;
     }
     
-    // Faz um loop nos 3 meses que vieram da API
     dados.historicoMeses.forEach((item, index) => {
-        // Como o index começa em 0, somamos 1 para encontrar os IDs: 1, 2 e 3
         const id = index + 1;
-        
         const mesElemento = document.getElementById(`api-month-${id}`);
         const valorElemento = document.getElementById(`api-val-${id}`);
         
-        // Se o elemento existir no HTML, atualiza com o dado da API
         if (mesElemento && valorElemento) {
             mesElemento.innerText = item.mes;
-            
-            // Troca o ponto por vírgula para manter o padrão brasileiro (ex: 280.2 vira 280,2)
             const valorFormatado = item.valor.toString().replace('.', ',');
             valorElemento.innerText = `${valorFormatado} mm`;
         }
     });
 }
-
 
 fetchRiverData();
 setInterval(fetchRiverData, LIVE_CHECK_TIMEOUT);

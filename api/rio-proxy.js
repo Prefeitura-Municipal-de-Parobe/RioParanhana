@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   const endpoint = req.query.path || '';
 
   try {
-    const response = await httpFetch(`http://apirio.parobe.rs.gov.br:3008/${endpoint}`);
+    const response = await fetch(`http://apirio.parobe.rs.gov.br:3008/${endpoint}`);
     const data = await response.json();
 
     res.setHeader('Access-Control-Allow-Origin', '*');
