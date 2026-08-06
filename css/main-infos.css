@@ -1,0 +1,457 @@
+.main-top-infos {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5%;
+}
+
+.main-left-section {
+    display: flex;
+    flex-direction: column;
+    width: 1200px;
+    max-width: 1200px;
+}
+
+.main-right-section {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    gap: 2%;
+    padding: 0 0 1.5% 0;
+    color: black;
+
+}
+
+.nivel-atual-rio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--white);
+    width: 100%;
+    height: 15%;
+    padding: 2% 0;
+
+    border-radius: var(--radius);
+    color: black;
+    font-weight: 800;
+}
+
+.info-title {
+    font-weight: 800;
+}
+
+.info-meteo-cards {
+    font-size: var(--main-info-cards-text);
+    padding: 2%;
+    color: var(--text-secondary);
+}
+
+.infos-meteoreologicas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.5rem;
+    border-radius: var(--radius);
+}
+
+.meteoreologia {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 5% 1.5rem 3rem 1.5rem;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+
+    border-radius: var(--radius);
+}
+
+
+.infos-bottom-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    height: 100%;
+
+}
+
+.noc-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    color: var(--gray-700);
+    box-sizing: border-box;
+
+}
+
+/* Cabeçalhos dos Cards */
+.noc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.noc-header h3 {
+    margin: 0;
+    font-size: .9vw;
+}
+
+.noc-badge {
+    background-color: var(--gray-100);
+    color: var(--gray-600);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.noc-badge.outline {
+    background-color: transparent;
+    border: 1px solid var(--gray-300);
+    color: var(--gray-500);
+}
+
+/* =========================================
+   ESTILOS: QUANTIDADE DE CHUVA (Precipitação)
+   ========================================= */
+.noc-rain-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1rem;
+    height: 100%;
+}
+
+/* Tanque visual */
+.noc-tank {
+    position: relative;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: var(--gray-50);
+    min-height: 200px;
+}
+
+.noc-tank-fill {
+    background: linear-gradient(to top, var(--primary), var(--primary-light));
+    width: 100%;
+    transition: height var(--transition);
+}
+
+.noc-tank-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.noc-tank-value {
+    font-size: 80%;
+    font-weight: bold;
+    color: var(--white);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    max-width: 100%;
+    margin-bottom: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    word-break: break-all
+}
+
+.noc-tank-label {
+    font-size: 0.8rem;
+    color: var(--gray-700);
+    margin-top: auto;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.noc-tank-label strong {
+    color: var(--gray-900);
+    font-size: 1rem;
+}
+
+/* Lista de Histórico */
+.noc-history {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    justify-content: space-between;
+}
+
+.noc-history-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--gray-50);
+    padding: 0.8rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+
+    border: 1px solid var(--gray-100);
+}
+
+.noc-history-item.active {
+    background-color: var(--white);
+    border-color: var(--primary-light);
+    color: var(--gray-800);
+    box-shadow: var(--shadow-sm);
+}
+
+.noc-history-item .month {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.noc-history-item strong {
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   ESTILOS: RÉGUA (Nível do Rio)
+   ========================================= */
+.noc-chart-area {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200px;
+    padding-top: 1rem;
+    border: none;
+    border-top: 1px solid var(--gray-400);;
+    height: 100%;
+    
+}
+
+.noc-limit-line {
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px dashed;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.2rem;
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.noc-limit-line span {
+    background-color: var(--white);
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    border-radius: 4px;
+    z-index: 0;
+}
+
+.noc-limit-line.alert {
+    top: 15%;
+    border-color: var(--red-live);
+    color: var(--red-live);
+
+}
+
+.noc-limit-line.warning {
+    top: 40%;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.noc-current-level {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.noc-current-level .label {
+    font-size: 0.70rem;
+    color: var(--gray-500);
+    letter-spacing: 0.5px;
+    box-shadow: none !important;
+    z-index: 1;
+}
+
+.noc-current-level .value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+    z-index: 1;
+}
+
+.noc-current-level small {
+    font-size: 1rem;
+    color: var(--gray-500);
+}
+
+.noc-chart-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(to top, rgba(80, 162, 255, 0.2), transparent);
+    border-bottom: 3px solid var(--primary);
+}
+
+@media (max-width: 1440px) {
+    .infos-bottom-right {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .noc-rain-content {
+        grid-template-columns: 1fr 1.5fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .main-top-infos {
+        flex-direction: column;
+    }
+
+    .main-left-section {
+        width: 100%;
+    }
+
+    .main-right-section {
+        width: 100%;
+        gap: 1vw;
+    }
+
+    .info-title {
+        font-size: 2.5vw;
+    }
+
+    .info-meteo-cards {
+        font-size: 3.5vw;
+    }
+
+    .noc-header h3 {
+        font-size: 3vw;
+    }
+
+    .noc-current-level .value {
+        font-size: 3vw;
+    }
+}
+
+@media (max-width: 500px) {
+    .main-content {
+        padding: 0.8rem 4.5rem 1rem 0.8rem;
+    }
+
+    .video-container {
+        height: 300px;
+    }
+
+    .video-wrapper {
+        height: 300px !important;
+    }
+
+    #info-container {
+        padding: 5% 5% !important
+    }
+
+    .infos-bottom-right {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ===== ESTILOS DA RÉGUA FIXA LATERAL ===== */
+    .regua {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 3.5rem;
+        height: 100vh;
+        height: 100dvh;
+
+        background-color: var(--white);
+
+        border-radius: 0;
+        border-left: 1px solid var(--gray-200);
+        box-shadow: var(--shadow-md);
+
+
+        padding: 1rem 0 0 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 1;
+    }
+
+    /* ===== ADAPTAÇÃO DO CONTEÚDO (Oculta o que não cabe) ===== */
+    .regua .noc-header h3,
+    .regua .noc-badge,
+    .regua .noc-limit-line span,
+    .regua .noc-current-level .label {
+        display: none;
+    }
+
+    .regua .noc-current-level {
+        right: 50%;
+        top: 50% !important;
+
+        transform: translate(50%, -50%) !important;
+        border-bottom: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
+    }
+
+    .regua .noc-current-level .value {
+        font-size: 1.1rem;
+    }
+
+
+    .noc-chart-gradient {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+
+        background: linear-gradient(to top, rgba(80, 162, 255, 0.6), rgba(80, 162, 255, 0.15));
+
+
+        border-top: 3px solid var(--primary);
+
+        z-index: 1;
+    }
+
+    .main-right-section {
+        width: 100%;
+        gap: 1vw;
+    }
+
+    .info-title {
+        font-size: 3.5vw;
+    }
+
+    .info-meteo-cards {
+        font-size: 5.5vw;
+    }
+
+    .noc-header h3 {
+        font-size: 5vw;
+    }
+}

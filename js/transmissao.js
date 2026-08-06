@@ -1,42 +1,39 @@
-const SUPABASE_URL = "";
-const SUPABASE_SECRET = "";
-const GOOGLE_API_KEY = "AIzaSyACoYmuLmsnKETVSWeSx5T5wvcvv8I5xsE";
-const CHANNEL_ID = "UCZC4KJEmy7_bka6uV_x1RfQ";
-const LIVE_CHECK_TIMEOUT = 15 * 60 * 1000;
+const LIVE_CHECK_TIMEOUT = 20 * 60 * 1000;
 
-let CURRENT_LIVE_ID = "";
+const CURRENT_LIVE_ID = "";
 
 const offlineAlert = document.querySelector('#offline-message-container');
 const youtubeIframe = document.querySelector('#youtube-transmissison-iframe');
 
-
 const checkRiverTransmission = async () => {
-    
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${GOOGLE_API_KEY}`;
-    
+
     try{
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await fetch("http://apirio.parobe.rs.gov.br:3008/live/id");
+        const transmissionData = await response.json();
 
-        if(data && data.items && data.items.length > 0){
-            const videoId = data.items[0].id.videoId;
-
-            if(videoId != CURRENT_LIVE_ID){
-                CURRENT_LIVE_ID = data.items[0].id.videoId;
-                youtubeIframe.src = `https://www.youtube.com/embed/${CURRENT_LIVE_ID}?autoplay=1&mute=1&controls=1&modestbranding=0&rel=0&playsinline=1`;
-                youtubeIframe.style.display = "block";
-                offlineAlert.style.display = "none";
-            }
-        } else {
-            offlineAlert.style.display = "flex";
+        if(!transmissionData.transmissionUrl){
+            offlineAlert.style.backgroundImage = "none";
+            offlineAlert.innerHTML = `
+                <h2 style="display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">
+                    TRANSMISSÃO
+                    EM
+                    MANUTENÇÃO</h2>
+                <p style="display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 500; margin: 0; color:#495057cb;">A transmissão será
+                    reestabelecida em breve!</p>
+            `;
             youtubeIframe.style.display = "none";
+        } else {
+            offlineAlert.style.backgroundImage = "none";
+            youtubeIframe.style.display = "flex";
+            youtubeIframe.src = transmissionData.transmissionUrl;
         }
 
-    } catch (error) {
-        console.error(error)
+    } catch (err){
+        console.error(err.message);
     }
-}
 
+
+}
 
 checkRiverTransmission();
 

@@ -1,12 +1,25 @@
 :root {
     --primary: #50A2FF;
     --primary-dark: #0057af;
+
+    --primary-dark-mode: #032e49;
+    --darker-dark-mode: #031e3a;
 }
 
 .footer {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
     color: var(--white);
     margin-top: auto;
+}
+
+.footer.light {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+}
+
+.footer.dark {
+    background: linear-gradient(135deg, var(--primary-dark-mode) 0%, var(--darker-dark-mode) 100%);
+    color: var(--white);
 }
 
 .footer-content {

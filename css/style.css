@@ -31,12 +31,15 @@
     --accent: #38BDF8;
     --status-online: #22C55E;
     --status-offline: #EF4444;
+
+    --main-info-cards-text: 1.5vw 
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background-color 0.2s;
 }
 
 html {
@@ -53,14 +56,26 @@ body {
     overflow-x: hidden;
 }
 
+body.dark{
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    color: var(--text-primary) !important;
+    background-color: var(--bg-main) !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
 .light{
-    box-shadow: var(--shadow-md);
-    background-color: var(--white);
-    color: var(--gray-700);
+    background-color: var(--white) !important;
+    color: var(--gray-600) !important;
+    box-shadow: var(--shadow-xl) !important;
 }
 
 .dark{
-    background-color: var(--bg-main);
+    background-color: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+    border: none;
 }
 
 @media (max-width: 768px) {

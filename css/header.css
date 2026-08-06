@@ -3,17 +3,26 @@
     --primary-dark: #0057af;
     --red-live: #e53e3e;
     --white: #ffffff;
+
+    --primary-dark-mode: #032e49;
+    --darker-dark-mode: #031e3a;
 }
 
-
-
 .header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: var(--white);
     padding: 0;
     top: 0;
     z-index: 1000;
     box-shadow: var(--shadow-lg);
+}
+
+.header.light {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+}
+
+.header.dark {
+    background: linear-gradient(135deg, var(--primary-dark-mode) 0%, var(--darker-dark-mode) 100%);
+    color: var(--white);
 }
 
 .header-content {

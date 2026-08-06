@@ -6,9 +6,8 @@
 
 .weather-source {
     font-size: 13px;
-    color: #666;
     margin-bottom: 20px;
-    word-wrap: break-word;/
+    word-wrap: break-word;
 }
 
 .weather-cards {
@@ -21,7 +20,6 @@
 .card {
     padding: 20px;
     border-radius: 12px;
-    color: #333;
     text-align: center; 
 }
 

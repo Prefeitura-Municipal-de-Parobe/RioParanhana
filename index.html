@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-56H7LHPGNQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-56H7LHPGNQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-56H7LHPGNQ');
-</script>
+        gtag('config', 'G-56H7LHPGNQ');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parobé - Rio Paranhana - Ao Vivo</title>
@@ -17,21 +18,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <link rel="stylesheet" href="./css/style.css"/>
-    <link rel="stylesheet" href="./css/header.css"/>
-    <link rel="stylesheet" href="./css/main.css"/>
-    <link rel="stylesheet" href="./css/video-section.css"/>
-    <link rel="stylesheet" href="./css/info-cards.css"/>
-    <link rel="stylesheet" href="./css/weather-cards.css"/>
-    <link rel="stylesheet" href="./css/footer.css"/>
-    <link rel="stylesheet" href="./css/utils.css"/>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/main-infos.css" />
+    <link rel="stylesheet" href="./css/video-section.css" />
+    <link rel="stylesheet" href="./css/info-cards.css" />
+    <link rel="stylesheet" href="./css/weather-cards.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/utils.css" />
 
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-    
-<body>
- 
-    <header class="header">
+
+<body id="page-body">
+
+    <header class="header light" id="header">
         <div class="header-content">
             <div class="logo-container">
                 <img src="./img/logo2.png" alt="Brasão da Prefeitura de Parobé" class="logo-img" id="logoImg">
@@ -41,124 +43,216 @@
                 <span>AO VIVO</span>
             </div>
         </div>
-
-
     </header>
 
+    <button class="dark-theme-toggle-button light">
+        <i class="bi bi-moon"></i>
+    </button>
 
-   <main class="main-content">
-        <div class="video-container">
-        <div class="video-wrapper" id="video-wrapper" style="display: flex; position: relative; width: 100%; height: 480px; overflow: hidden; border-radius: 16px;">
-            
-            <div class="offline-message-container" id="offline-message-container">
-                <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">TRANSMISSÃO EM MANUTENÇÃO</h2>
-                <p style="font-size: 1rem; font-weight: 500; margin: 0; color:#495057cb;">A transmissão será reestabelecida em breve!</p>
-            </div>
+    <main class="main-content">
+        <div class="main-top-infos">
+            <div class="main-left-section">
+                <div class="video-container">
 
-            <iframe
-                id="youtubePlayer" 
-                style="position: absolute; top: -15%; left: 0; width: 100%; height: 130%; border: 0;"
-                title="AO VIVO | Monitoramento Rio Paranhana" 
-                src="https://www.youtube.com/embed/uCRL-VV1khg?autoplay=1&mute=1&controls=1&modestbranding=0&rel=0&playsinline=1"
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
-            </iframe>
-                
-        </div>
-        </div>
+                    <div class="video-wrapper light" id="video-wrapper"
+                        style="display: flex; position: relative; width: 100%; height: 480px; overflow: hidden; border-radius: 16px;">
 
-        <section style="background: white; border-radius: 16px; padding: 30px; margin: 24px 0; border: 1px solid #e9ecef; box-shadow: 0 4px 12px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif;">
-            
-            <div style="display: flex; align-items: center; gap: 12px; color: #e53e3e; margin-bottom: 20px; border-bottom: 2px solid #f8f9fa; padding-bottom: 15px;">
-                <i data-lucide="alert-circle" style="width: 28px; height: 28px;"></i>
-                <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">ACOMPANHAMENTO EM TEMPO REAL – RIO PARANHANA</h2>
-            </div>
-            <p style="color: #495057; line-height: 1.8; font-size: 15px; margin-bottom: 25px;">
-                Esta transmissão tem como objetivo fornecer imagens ao vivo 24h do Rio Paranhana, especificamente na região da ponte que liga as cidades de <strong>Parobé e Taquara</strong>. Este é um serviço de utilidade pública para auxiliar a comunidade, motoristas e órgãos de segurança no acompanhamento do nível das águas e das condições climáticas locais.
-            </p>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
-                
-                <!-- Localização -->
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
-                        <i data-lucide="map-pin" style="width: 18px;"></i> Localização e Horário
-                    </h3>
-                    <p style="font-size: 14px; color: #666; margin: 0;">📍 <strong>Local:</strong> Ponte sobre o Rio Paranhana</p>
-                    <p style="font-size: 14px; color: #666; margin: 0;">🕒 <strong>Transmissão:</strong> 24h / 7 dias por semana</p>
+                        <div class="offline-message-container" id="offline-message-container"></div>
+
+                        <iframe id="youtube-transmissison-iframe" id="youtubePlayer"
+                            style="position: absolute; top: -15%; left: 0; width: 100%; height: 130%; border: 0;"
+                            title="AO VIVO | Monitoramento Rio Paranhana" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
 
-                <!-- Avisos Técnicos -->
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <h3 style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
-                        <i data-lucide="shield-check" style="width: 18px;"></i> Informações Importantes
-                    </h3>
-                    <p style="font-size: 13px; color: #777; margin: 0; line-height: 1.4;">
-                        As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas oficiais, consulte sempre a <strong>Defesa Civil</strong>.
-                    </p>
-                </div>
 
-                <!-- Contatos de Emergência -->
-                <div style="background: #fff5f5; padding: 15px; border-radius: 12px; border: 1px solid #feb2b2;">
-                    <h3 style="font-size: 14px; color: #e53e3e; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                        <i data-lucide="phone-forwarded" style="width: 18px;"></i> Emergência
-                    </h3>
-                    <div style="font-size: 14px; color: #c53030; display: flex; flex-direction: column; gap: 4px;">
-                        <span>
-                            <strong>Defesa Civil:</strong>
-                            <a class="whatsapp" href="https://wa.me/5551991384714" target="_blank" rel="noopener noreferrer">(51) 99138-4714</a>
-                            <i style="margin-left: 3px; color: rgb(0, 193, 0);" class="bi bi-whatsapp"></i>
-                        </span>
-                        <span><strong>Bombeiros:</strong> 193 | <strong>Brigada:</strong> 190</span>
+
+                <section class="light" id="info-container"
+                    style="border-radius: 16px; padding: 30px; margin: 24px 0; font-family: 'Inter', sans-serif;">
+
+                    <div
+                        style="display: flex; align-items: center; gap: 12px; color: #e53e3e; margin-bottom: 20px; border-bottom: 2px solid #f8f9fa; padding-bottom: 15px;">
+                        <i data-lucide="alert-circle" style="width: 28px; height: 28px;"></i>
+                        <h2 style="font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">
+                            ACOMPANHAMENTO
+                            EM
+                            TEMPO REAL – RIO PARANHANA</h2>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+
+                        <!-- Localização -->
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <h3
+                                style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="map-pin" style="width: 18px;"></i> Localização e Horário
+                            </h3>
+                            <p style="font-size: 14px; margin: 0;">📍 <strong>Local:</strong> Ponte sobre o Rio
+                                Paranhana
+                            </p>
+                            <p style="font-size: 14px; margin: 0;">🕒 <strong>Transmissão:</strong> 24h / 7 dias por
+                                semana
+                            </p>
+                        </div>
+
+                        <!-- Avisos Técnicos -->
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <h3
+                                style="font-size: 14px; color: #50A2FF; text-transform: uppercase; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="shield-check" style="width: 18px;"></i> Informações Importantes
+                            </h3>
+                            <p style="font-size: 13px; margin: 0; line-height: 1.4;">
+                                As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas
+                                oficiais,
+                                consulte sempre a <strong>Defesa Civil</strong>.
+                            </p>
+                        </div>
+
+                        <!-- Contatos de Emergência -->
+                        <div class="contatos-emergencia" style="padding: 15px; border-radius: 12px; border: 1px solid #feb2b2;">
+                            <h3
+                                style="font-size: 14px; color: #e53e3e; text-transform: uppercase; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                                <i data-lucide="phone-forwarded" style="width: 18px;"></i> Emergência
+                            </h3>
+                            <div
+                                style="font-size: 14px; color: #c53030; display: flex; flex-direction: column; gap: 4px;">
+                                <span>
+                                    <strong>Defesa Civil:</strong>
+                                    <a class="whatsapp" href="https://wa.me/5551991384714" target="_blank"
+                                        rel="noopener noreferrer">(51) 99138-4714</a>
+                                    <i style="margin-left: 3px; color: rgb(0, 193, 0);" class="bi bi-whatsapp"></i>
+                                </span>
+                                <span><strong>Bombeiros:</strong> 193 | <strong>Brigada:</strong> 190</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="main-right-section">
+                <div class="nivel-atual-rio light" id="noc" >
+                    <p class="info-title">Nivel atual do rio</p>
+                    <p class="info-meteo-cards" id="NivelRio"></p>
+                </div>
+                <div class="infos-meteoreologicas">
+                    <div class="info-vento meteoreologia light" id="temp-atual" >
+                        <p class="info-title">Temperatura atual</p>
+                        <p class="info-meteo-cards" id="TempAtual"></p>
+
+                    </div>
+                    <div class="info-temp meteoreologia light" id="sens-term" >
+                        <p class="info-title">Sensação termica</p>
+                        <p class="info-meteo-cards" id="SensTerm"></p>
+                    </div>
+                    <div class="info-sens-term meteoreologia light" id="velo-vento" >
+                        <p class="info-title">Velocidade do vento</p>
+                        <p class="info-meteo-cards" id="VeloVento"></p>
+                    </div>
+                    <div class="info-vento-dire meteoreologia light" id="dire-vento" >
+                        <p class="info-title">Direção do vento</p>
+                        <p class="info-meteo-cards" id="DireVento"></p>
+                    </div>
+                </div>
+                <div class="infos-bottom-right">
+                    <!-- CAIXA DE PRECIPITAÇÃO -->
+                    <div class="preciptacao noc-card light" id="noc-prec">
+                        <div class="noc-header">
+                            <h3 class="info-title">Quantidade de Chuva</h3>
+                            
+                        </div>
+
+                        <div class="noc-rain-content " >
+                            <!-- Tanque visual de chuva -->
+                            <div class="noc-tank light" id="noc-meter">
+                                <div class="noc-tank-fill light" id="api-rain-fill" style="height: 60%;"></div>
+                                <div class="noc-tank-info">
+                                    <span class="noc-tank-value" id="api-rain-current-val"></span>
+                                    <span class="noc-tank-label">Máx. histórico<br><strong
+                                            id="api-rain-month-label">JULHO</strong></span>
+                                </div>
+                            </div>
+
+                            <!-- Histórico de Meses -->
+                            <div class="noc-history">
+                                <div class="noc-history-item active light" id="noc-month-1">
+                                    <span class="month" id="api-month-1">Julho</span>
+                                    <span class="value">Atual. <strong id="api-val-1"></strong></span>
+                                </div>
+                                <div class="noc-history-item light" id="noc-month-2">
+                                    <span class="month" id="api-month-2">Junho</span>
+                                    <span class="value">Máx. <strong id="api-val-2"></strong></span>
+                                </div>
+                                <div class="noc-history-item light" id="noc-month-3">
+                                    <span class="month" id="api-month-3">Maio</span>
+                                    <span class="value">Máx. <strong id="api-val-3"></strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CAIXA DA RÉGUA (Nível do Rio) -->
+                    <div class="regua noc-card light" id="noc-regua-container">
+                        <div class="noc-header">
+                            <h3 class="info-title">Nível do Rio</h3>
+                            <span class="noc-badge outline">Atualizado: <span id="api-last-update">--/--
+                                    --:--</span></span>
+                        </div>
+
+                        <fieldset class="noc-chart-area">
+                            <legend>6m</legend>
+                            <!-- Linhas de limite -->
+                            <div class="noc-limit-line alert">
+                                <span>Alerta</span>
+                            </div>
+                            <div class="noc-limit-line warning">
+                                <span>Cuidado</span>
+                            </div>
+
+                            <!-- Valor atual em destaque -->
+                        
+                            <div class="noc-current-level" id="api-river-indicator">
+                                <span class="label">NÍVEL ATUAL →</span>
+                                <span class="value"><span id="api-nivel-atual"></span><small>m</small></span>
+                            </div>
+
+                            <!-- Gradiente de fundo simulando o líquido do gráfico -->
+                            <div class="noc-chart-gradient" id="api-river-fill"></div>
+                        </fieldset>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <div class="weather-container">
-            <h2>Clima - últimas 24 horas</h2>
-            <p class="weather-source">
-                Fonte dos dados: Open-Meteo (https://open-meteo.com/)
-            </p>
-
-            <div class="weather-cards">
-                <div class="card card-green">
-                    <p>Temperatura atual</p>
-                    <h3 id="tempAtual">--°C</h3>
-                </div>
-
-                <div class="card card-blue">
-                    <p>Mínima (24h)</p>
-                    <h3 id="tempMin">--°C</h3>
-                </div>
-
-                <div class="card card-red">
-                    <p>Máxima (24h)</p>
-                    <h3 id="tempMax">--°C</h3>
-                </div>
-            </div>
-
-            <canvas id="graficoClima"></canvas>
-        </div>
+        </div>       
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="footer">
         <div class="footer-content">
             <div class="footer-logo">
                 <img src="./img/logo2.png" alt="Brasão" class="footer-logo-img" id="footerLogoImg">
             </div>
             <div class="footer-text">
                 <p class="footer-dev">Desenvolvido pelo Departamento de TI</p>
-                <p class="footer-dev"> Contato: <a href="mailto:contato@parobe.rs.gov.br">contato@parobe.rs.gov.br</a></p>
+                <p class="footer-dev"> Contato: <a href="mailto:contato@parobe.rs.gov.br">contato@parobe.rs.gov.br</a>
+                </p>
             </div>
         </div>
     </footer>
-    
+
     <script src="./js/script.js"></script>
-    
     <!--Clima-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="./js/clima.js"></script>
+        
+    <!--
+        <script src="./js/clima.js"></script>
+    -->
+        
+    <script src="./js/transmissao.js" type="module"></script>
+    <script src="./js/dadosRio.js"></script>    
+    <script src="./js/darkTheme.js"></script>
+
 </body>
+
 </html>
