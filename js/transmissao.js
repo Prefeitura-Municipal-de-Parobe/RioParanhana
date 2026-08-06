@@ -8,7 +8,7 @@ const youtubeIframe = document.querySelector('#youtube-transmissison-iframe');
 const checkRiverTransmission = async () => {
 
     try{
-        const response = await fetch("http://apirio.parobe.rs.gov.br:3008/live/id");
+        const response = await fetch("https://apirio.parobe.rs.gov.br:3008/live/id");
         const transmissionData = await response.json();
 
         if(!transmissionData.transmissionUrl){
