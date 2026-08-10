@@ -44,6 +44,17 @@
     color: #c0392b;
 }
 
+#dire-vento{
+    background-image: url('../img/wind-directions.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+}
+
+#compass-needle{
+    height: 50px;
+}
+
 canvas {
     background: #fff;
     border-radius: 12px;

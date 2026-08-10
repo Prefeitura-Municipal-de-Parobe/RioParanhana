@@ -1,3 +1,5 @@
+import checkWindDirection from "./windDirection";
+
 const LIVE_CHECK_TIMEOUT = 20 * 60 * 1000;
 
 let dataAtual = new Date();
@@ -36,11 +38,9 @@ const mapWeatherData = (riverLevel, weatherSummaryData) => {
 async function fetchRiverData() {
   try {
     const riverLevelRes = await fetch('/api/rio-proxy?path=river/level');
-    if (!riverLevelRes.ok) throw new Error(`HTTP error! Status: ${riverLevelRes.status}`);
     const riverLevelData = await riverLevelRes.json();
 
     const weatherSummaryRes = await fetch('/api/rio-proxy?path=weather');
-    if (!weatherSummaryRes.ok) throw new Error(`HTTP error! Status: ${weatherSummaryRes.status}`);
     const weatherSummaryData = await weatherSummaryRes.json();
 
     mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData);
@@ -61,7 +61,7 @@ function renderizarDadosFluviais(riverLevel, dados) {
     document.querySelector('#TempAtual').innerText = `${dados.tempAtual}°c`;
     document.querySelector('#SensTerm').innerText = `${dados.sensTerm}°c`;
     document.querySelector('#VeloVento').innerText = `${dados.veloVento}Km/H`;
-    document.querySelector('#DireVento').innerText = `${dados.direVento}`;
+    document.querySelector('#compass-needle').style.rotate = `${checkWindDirection(dados.direVento)}deg`;
 }
 
 function renderizarGraficos(riverLevel, dados) {

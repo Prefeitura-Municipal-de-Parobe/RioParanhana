@@ -68,7 +68,7 @@ body.dark{
 
 .light{
     background-color: var(--white) !important;
-    color: var(--gray-600) !important;
+    color: var(--gray-800) !important;
     box-shadow: var(--shadow-xl) !important;
 }
 
