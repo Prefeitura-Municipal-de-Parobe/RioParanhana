@@ -1,5 +1,3 @@
-import checkWindDirection from "./windDirection";
-
 const LIVE_CHECK_TIMEOUT = 20 * 60 * 1000;
 
 let dataAtual = new Date();
