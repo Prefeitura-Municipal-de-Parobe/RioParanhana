@@ -85,13 +85,13 @@ const checkWindDirection = (originDirection) => {
 async function fetchRiverData() {
   try {
 
-    const riverLevelRes = await fetch('/api/rio-proxy?path=river/level');
+    const riverLevelRes = await fetch('/api/rio-proxy?path=/river/level');
     const riverLevelData = await riverLevelRes.json();
 
-    const weatherSummaryRes = await fetch('/api/rio-proxy?path=weather');
+    const weatherSummaryRes = await fetch('/api/rio-proxy?path=/weather');
     const weatherSummaryData = await weatherSummaryRes.json();
 
-    const riverRecord = await fetch('/api/rio-proxy?path=river_record');
+    const riverRecord = await fetch('/api/rio-proxy?path=/river_record');
     const riverRecordData = await riverRecord.json();
 
     mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData, riverRecordData);
