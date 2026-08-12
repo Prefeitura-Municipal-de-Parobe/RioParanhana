@@ -130,7 +130,7 @@ function renderizarGraficos(riverLevel, dados, riverRecord) {
     document.getElementById('api-last-update').innerText = `${addZeroBefore(diaAtual)}/${addZeroBefore(mesAtual)}/${dataAtual.getFullYear()}-${addZeroBefore(horaAtual)}:${dataAtual.getMinutes()}`;
     
     if (dados.historicoMeses.length > 0) {
-        document.getElementById('api-rain-month-label').innerText = buscarMesTraduzido(riverRecord.month).;
+        document.getElementById('api-rain-month-label').innerText = buscarMesTraduzido(riverRecord.month);
         document.getElementById('api-rain-current-val').innerText = `${dados.historicoMeses[0].valor}mm`;
     }
     
