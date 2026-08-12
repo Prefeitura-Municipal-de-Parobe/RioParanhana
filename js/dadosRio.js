@@ -84,6 +84,7 @@ const checkWindDirection = (originDirection) => {
 
 async function fetchRiverData() {
   try {
+
     const riverLevelRes = await fetch('/api/rio-proxy?path=river/level');
     const riverLevelData = await riverLevelRes.json();
 
