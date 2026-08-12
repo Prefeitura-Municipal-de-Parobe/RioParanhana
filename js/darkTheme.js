@@ -15,12 +15,7 @@ const darkComponents = [
     document.querySelector('#noc-prec'),
     document.querySelector('#noc-meter'),
     document.querySelector('#api-rain-fill'),
-    document.querySelector('#noc-month-1'),
-    document.querySelector('#noc-month-2'),
-    document.querySelector('#noc-month-3'),
     document.querySelector('#noc-regua-container'),
-
-
 ];
 
 
