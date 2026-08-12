@@ -16,7 +16,7 @@ const dadosClima = {
     chuvaMaxMes: 0,
     nivelRioMaxGrafico: 6.0,
     historicoMeses: [
-        { mes: 'Agosto', valor: dadoFake },
+        { mes: 'Agosto', valor: 0 },
         { mes: 'Julho', valor: 200.2 },
         { mes: 'Junho', valor: 74.2 },
         { mes: 'Maio', valor: 70.6 }
@@ -32,6 +32,24 @@ const mapWeatherData = (riverLevel, weatherSummaryData, riverRecordData) => {
     dadosClima.chuvaMaxMes = riverRecordData.recordLevel;
     nivelRio = riverLevel;
 };
+
+const buscarMesTraduzido = (mesAtual) => {
+    
+    switch(mesAtual){
+        case "JANUARY": return "JAN";
+        case "FEBRUARY": return "FEV";
+        case "MARCH": return "MAR";
+        case "APRIL": return "ABR";
+        case "MAY": return "MAI";
+        case "JUNE": return "JUN";
+        case "JULY": return "JUL";
+        case "AUGUST": return "AGO";
+        case "SEPTEMBER": return "SET";
+        case "OCTOBER": return "OUT";
+        case "NOVEMBER": return "NOV";
+        case "DECEMBER": return "DEZ";
+    }
+}
 
 const checkWindDirection = (originDirection) => {
     
@@ -77,7 +95,7 @@ async function fetchRiverData() {
 
     mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData, riverRecordData);
     renderizarDadosFluviais(nivelRio, dadosClima);
-    renderizarGraficos(nivelRio, dadosClima);
+    renderizarGraficos(nivelRio, dadosClima, riverRecord);
     
   } catch (error) {
     console.error('Network or parsing error:', error);
@@ -96,7 +114,7 @@ function renderizarDadosFluviais(riverLevel, dados) {
     document.querySelector('#compass-needle').style.rotate = `${checkWindDirection(dados.direVento) - 180}deg`;
 }
 
-function renderizarGraficos(riverLevel, dados) {
+function renderizarGraficos(riverLevel, dados, riverRecord) {
     let chuvaPercentual = (dados.chuvaMesAtual / dados.chuvaMaxMes) * 100;
     if (chuvaPercentual > 100) chuvaPercentual = 100;
     
@@ -112,7 +130,7 @@ function renderizarGraficos(riverLevel, dados) {
     document.getElementById('api-last-update').innerText = `${addZeroBefore(diaAtual)}/${addZeroBefore(mesAtual)}/${dataAtual.getFullYear()}-${addZeroBefore(horaAtual)}:${dataAtual.getMinutes()}`;
     
     if (dados.historicoMeses.length > 0) {
-        document.getElementById('api-rain-month-label').innerText = dados.historicoMeses[0].mes.toUpperCase().substring(0, 3);
+        document.getElementById('api-rain-month-label').innerText = buscarMesTraduzido(riverRecord.month).;
         document.getElementById('api-rain-current-val').innerText = `${dados.historicoMeses[0].valor}mm`;
     }
     
