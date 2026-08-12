@@ -127,15 +127,16 @@
 
 /* Tanque visual */
 .noc-tank {
+    display: flex;
     position: relative;
     border: 1px solid var(--gray-200);
     border-radius: var(--radius);
     overflow: hidden;
-    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     background-color: var(--gray-50);
     min-height: 200px;
+    width: 100%;
 }
 
 .noc-tank-fill {

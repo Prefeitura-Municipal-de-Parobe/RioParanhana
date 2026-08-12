@@ -51,8 +51,19 @@
     background-size: 50%;
 }
 
+@keyframes windBlow{
+    0%, 100% { 
+        transform: rotate(0deg); 
+    }
+    50% { 
+        transform: rotate(14deg); 
+    }
+}
+
 #compass-needle{
     height: 50px;
+    rotate: -7deg;
+    animation: windBlow 2s infinite ease-in-out;
 }
 
 canvas {

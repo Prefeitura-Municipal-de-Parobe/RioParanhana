@@ -5,7 +5,6 @@ let horaAtual = dataAtual.getHours();
 let mesAtual = dataAtual.getMonth() + 1;
 let diaAtual = dataAtual.getDate();
 
-let dadoFake = 0;
 let nivelRio = 0;
 
 const dadosClima = {
@@ -13,8 +12,8 @@ const dadosClima = {
     sensTerm: 0,
     veloVento: 0,
     direVento: "N/D",
-    chuvaAtual: dadoFake,
-    chuvaMaxMes: 300,
+    chuvaMesAtual: 0,
+    chuvaMaxMes: 0,
     nivelRioMaxGrafico: 6.0,
     historicoMeses: [
         { mes: 'Agosto', valor: dadoFake },
@@ -24,12 +23,13 @@ const dadosClima = {
     ]
 };
 
-const mapWeatherData = (riverLevel, weatherSummaryData) => {
+const mapWeatherData = (riverLevel, weatherSummaryData, riverRecordData) => {
     dadosClima.tempAtual = weatherSummaryData.temperature;
     dadosClima.sensTerm = weatherSummaryData.thermal_sensation;
     dadosClima.veloVento = weatherSummaryData.wind_speed;
     dadosClima.direVento = weatherSummaryData.wind_direction;
-    dadosClima.chuvaAtual = weatherSummaryData.rain_volume_month;
+    dadosClima.chuvaMesAtual = weatherSummaryData.rain_volume_month;
+    dadosClima.chuvaMaxMes = riverRecordData.recordLevel;
     nivelRio = riverLevel;
 };
 
@@ -72,7 +72,10 @@ async function fetchRiverData() {
     const weatherSummaryRes = await fetch('/api/rio-proxy?path=weather');
     const weatherSummaryData = await weatherSummaryRes.json();
 
-    mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData);
+    const riverRecord = await fetch('/api/rio-proxy?path=river_record');
+    const riverRecordData = await riverRecord.json();
+
+    mapWeatherData(riverLevelData.nivelMedicao, weatherSummaryData, riverRecordData);
     renderizarDadosFluviais(nivelRio, dadosClima);
     renderizarGraficos(nivelRio, dadosClima);
     
@@ -94,10 +97,10 @@ function renderizarDadosFluviais(riverLevel, dados) {
 }
 
 function renderizarGraficos(riverLevel, dados) {
-    let chuvaPercentual = (dados.chuvaAtual / dados.chuvaMaxMes) * 100;
+    let chuvaPercentual = (dados.chuvaMesAtual / dados.chuvaMaxMes) * 100;
     if (chuvaPercentual > 100) chuvaPercentual = 100;
     
-    document.getElementById('api-rain-current-val').innerText = `${dados.chuvaAtual}mm`;
+    document.getElementById('api-rain-current-val').innerText = `${dados.chuvaMesAtual}mm`;
     document.getElementById('api-rain-fill').style.height = `${chuvaPercentual}%`;
     
     let rioPercentual = (riverLevel * 100) / dados.nivelRioMaxGrafico;
@@ -113,7 +116,7 @@ function renderizarGraficos(riverLevel, dados) {
         document.getElementById('api-rain-current-val').innerText = `${dados.historicoMeses[0].valor}mm`;
     }
     
-    dados.historicoMeses.forEach((item, index) => {
+    /*dados.historicoMeses.forEach((item, index) => {
         const id = index + 1;
         const mesElemento = document.getElementById(`api-month-${id}`);
         const valorElemento = document.getElementById(`api-val-${id}`);
@@ -123,7 +126,7 @@ function renderizarGraficos(riverLevel, dados) {
             const valorFormatado = item.valor.toString().replace('.', ',');
             valorElemento.innerText = `${valorFormatado} mm`;
         }
-    });
+    });*/
 }
 
 fetchRiverData();
