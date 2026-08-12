@@ -11,7 +11,8 @@ const checkRiverTransmission = async () => {
         const response = await fetch("/api/rio-proxy/?path=live/id");
         const transmissionData = await response.json();
 
-        if(!transmissionData.transmissionUrl || transmissionData.transmisisonId == null){
+        if(transmissionData.transmissionUrl == null || transmissionData.transmissionId == null){
+            console.log("Caiu no erro");
             offlineAlert.style.backgroundImage = "none";
             offlineAlert.innerHTML = `
                 <h2 style="display: flex; align-items: center; justify-content: center; font-size: 1.3rem; font-weight: 700; margin: 0; letter-spacing: -0.5px;">
