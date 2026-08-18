@@ -91,30 +91,38 @@ a {
 }
 
 .dc-logo-wrap {
-  width: 58px;
-  height: 58px;
-  flex: 0 0 58px;
+  width: 68px;
+  height: 68px;
+  flex: 0 0 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.dc-logo,
-.dc-fallback {
+.dc-logo {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 2px 7px rgba(0,0,0,.08));
 }
 
 .dc-fallback {
   display: none;
+  width: 68px;
+  height: 68px;
   place-items: center;
-  border-radius: 12px;
+  border-radius: 14px;
   background: white;
-  color: var(--blue-800);
-  border: 3px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255,255,255,.55);
+  overflow: hidden;
 }
 
-.dc-fallback svg {
-  width: 34px;
-  height: 34px;
+.dc-fallback img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
 }
 
 .brand-monitor h1 {
@@ -243,12 +251,14 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(520px, .94fr);
   gap: 20px;
+  align-items: stretch;
 }
 
 .right-top {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto auto minmax(112px, 1fr);
   gap: 16px;
+  min-height: 100%;
 }
 
 /* VIDEO */
@@ -521,7 +531,7 @@ a {
 }
 
 .metric-card {
-  min-height: 170px;
+  min-height: 154px;
   padding: 18px 10px;
   text-align: center;
   display: flex;
@@ -1122,5 +1132,161 @@ a {
   .emergency-item + .emergency-item {
     border-left: 0;
     border-top: 1px solid var(--line);
+  }
+}
+
+
+/* =========================================================
+   V3 - STATUS DO MONITORAMENTO
+   Ocupa o espaço antes vazio abaixo dos cards meteorológicos
+   ========================================================= */
+.system-health-card {
+  min-height: 112px;
+  padding: 15px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    linear-gradient(135deg, rgba(234,243,255,.7), rgba(255,255,255,.98));
+}
+
+.system-health-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.system-health-title > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue-900);
+}
+
+.system-health-title svg {
+  width: 18px;
+  height: 18px;
+  color: var(--blue-700);
+}
+
+.system-health-title strong {
+  font-size: 11px;
+  letter-spacing: .02em;
+}
+
+.system-health-title > span {
+  font-size: 9px;
+  color: var(--text-soft);
+}
+
+.system-health-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.health-item {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+}
+
+.health-item strong,
+.health-item small {
+  display: block;
+}
+
+.health-item strong {
+  color: var(--text);
+  font-size: 10px;
+}
+
+.health-item small {
+  margin-top: 2px;
+  color: var(--text-soft);
+  font-size: 9px;
+}
+
+.health-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  border-radius: 50%;
+  background: #d49a00;
+  box-shadow: 0 0 0 4px rgba(212,154,0,.11);
+}
+
+.health-dot.ok {
+  background: #20a653;
+  box-shadow: 0 0 0 4px rgba(32,166,83,.11);
+}
+
+.health-dot.error {
+  background: #e33636;
+  box-shadow: 0 0 0 4px rgba(227,54,54,.10);
+}
+
+.health-dot.waiting {
+  background: #d49a00;
+}
+
+.system-health-foot {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-soft);
+  font-size: 9px;
+}
+
+.system-health-foot svg {
+  width: 14px;
+  height: 14px;
+  color: var(--blue-700);
+}
+
+@media (max-width: 1280px) {
+  .right-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .system-health-card {
+    min-height: 125px;
+  }
+}
+
+@media (max-width: 620px) {
+  .dc-logo-wrap {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
+
+  .dc-fallback {
+    width: 52px;
+    height: 52px;
+  }
+
+  .dc-fallback img {
+    width: 42px;
+    height: 42px;
+  }
+
+  .system-health-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .system-health-title > span {
+    display: none;
   }
 }
