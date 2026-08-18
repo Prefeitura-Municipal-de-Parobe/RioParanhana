@@ -1290,3 +1290,34 @@ a {
     display: none;
   }
 }
+
+
+/* V5 - símbolo visual Defesa Civil integrado ao cabeçalho */
+.dc-logo-wrap {
+  width: 66px !important;
+  height: 66px !important;
+  flex: 0 0 66px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border-radius: 50% !important;
+  overflow: visible !important;
+}
+
+.dc-logo {
+  width: 66px !important;
+  height: 66px !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 3px 7px rgba(0,0,0,.14)) !important;
+}
+
+@media (max-width: 620px) {
+  .dc-logo-wrap,
+  .dc-logo {
+    width: 52px !important;
+    height: 52px !important;
+    flex-basis: 52px !important;
+  }
+}
