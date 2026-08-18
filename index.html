@@ -29,15 +29,15 @@
 
     <div class="brand-monitor">
       <div class="dc-logo-wrap">
-        <!-- Se o arquivo oficial existir, ele será usado. Caso contrário aparece o fallback. -->
         <img
           src="./img/defesa-civil-parobe.png"
           alt="Defesa Civil de Parobé"
           class="dc-logo"
+          id="dcOfficialLogo"
           onerror="this.style.display='none';document.getElementById('dcFallback').style.display='grid';"
         />
-        <div class="dc-fallback" id="dcFallback" aria-label="Defesa Civil">
-          <i data-lucide="shield-check"></i>
+        <div class="dc-fallback" id="dcFallback" aria-label="Defesa Civil de Parobé">
+          <img src="./img/defesa-civil-fallback.svg" alt="" />
         </div>
       </div>
 
@@ -73,6 +73,7 @@
   </header>
 
   <main class="dashboard">
+    <div id="integrationStatus" hidden></div>
 
     <!-- PRIMEIRA LINHA -->
     <section class="hero-grid">
@@ -173,6 +174,36 @@
             <small>últimos 30 dias</small>
           </article>
         </div>
+
+        <article class="card system-health-card">
+          <div class="system-health-title">
+            <div>
+              <i data-lucide="activity"></i>
+              <strong>STATUS DO MONITORAMENTO</strong>
+            </div>
+            <span>Atualização automática</span>
+          </div>
+
+          <div class="system-health-grid">
+            <div class="health-item" id="healthCamera">
+              <span class="health-dot waiting"></span>
+              <div><strong>Câmera</strong><small id="healthCameraText">Verificando</small></div>
+            </div>
+            <div class="health-item" id="healthRiver">
+              <span class="health-dot waiting"></span>
+              <div><strong>Dados do rio</strong><small id="healthRiverText">Aguardando</small></div>
+            </div>
+            <div class="health-item" id="healthWeather">
+              <span class="health-dot waiting"></span>
+              <div><strong>Clima</strong><small id="healthWeatherText">Atualizando</small></div>
+            </div>
+          </div>
+
+          <div class="system-health-foot">
+            <i data-lucide="radio-tower"></i>
+            <span>Monitoramento contínuo 24 horas por dia • Departamento de TI</span>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -359,6 +390,6 @@
   <script src="./js/transmissao.js" type="module"></script>
 
   <!-- Integração visual do novo front -->
-  <script src="./js/front-rio.js"></script>
+  <script src="./js/front-rio-v3.js"></script>
 </body>
 </html>
