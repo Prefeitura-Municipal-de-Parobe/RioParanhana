@@ -1,11 +1,18 @@
-const ALLOWED_PATHS = new Set(['live/id', 'nivel', 'nivel/atual', 'nivel/historico']);
 export default async function handler(req, res) {
-  const path = String(req.query.path || '').replace(/^\/+/, '');
-  if (!ALLOWED_PATHS.has(path)) return res.status(400).json({ error: 'Caminho não permitido' });
+  const endpoint = String(req.query.path || '').replace(/^\/+/, '');
+  if (!endpoint) return res.status(400).json({ error: 'Parâmetro path obrigatório' });
+  if (!/^[a-zA-Z0-9/_?=&.%:-]+$/.test(endpoint)) return res.status(400).json({ error: 'Path inválido' });
+  const upstream = `http://apirio.parobe.rs.gov.br:3008/${endpoint}`;
   try {
-    const response = await fetch(`http://rio.parobe.rs.gov.br:3008/${path}`, { signal: AbortSignal.timeout(8000) });
-    const body = await response.text();
-    res.setHeader('Cache-Control', path === 'live/id' ? 's-maxage=60, stale-while-revalidate=300' : 's-maxage=300, stale-while-revalidate=900');
-    res.status(response.status).setHeader('Content-Type', response.headers.get('content-type') || 'application/json').send(body);
-  } catch { res.status(502).json({ error: 'Serviço municipal temporariamente indisponível' }); }
+    const response = await fetch(upstream, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(12000) });
+    const text = await response.text();
+    res.setHeader('Cache-Control', 'no-store, max-age=0');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    if (!response.ok) return res.status(response.status).json({ error: 'API municipal respondeu com erro', status: response.status });
+    try { return res.status(200).json(JSON.parse(text)); }
+    catch { return res.status(502).json({ error: 'Resposta da API municipal não é JSON' }); }
+  } catch (error) {
+    console.error('[rio-proxy]', error);
+    return res.status(500).json({ error: 'Erro ao comunicar com o servidor da Prefeitura' });
+  }
 }
