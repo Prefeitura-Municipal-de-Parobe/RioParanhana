@@ -1,392 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0755b6" />
-  <title>Parobé - Monitoramento do Rio Paranhana</title>
-
-  <!-- Mantém os mesmos assets já existentes no site -->
-  <link rel="icon" href="./img/brasao.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Ícones -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Novo visual -->
-  <link rel="stylesheet" href="./css/front-rio.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0757ad">
+  <title>Monitoramento do Rio Paranhana | Parobé</title>
+  <link rel="stylesheet" href="css/front-rio.css">
 </head>
-
 <body>
   <header class="topbar">
-    <div class="brand-city">
-      <img src="./img/logo2.png" alt="Prefeitura Municipal de Parobé" class="city-logo" />
-    </div>
-
-    <div class="top-divider"></div>
-
-    <div class="brand-monitor">
-      <div class="dc-logo-wrap">
-        <img
-          src="./img/defesa-civil-parobe.svg"
-          alt="Defesa Civil de Parobé"
-          class="dc-logo"
-          id="dcOfficialLogo"
-          onerror="this.style.display='none';document.getElementById('dcFallback').style.display='grid';"
-        />
-        <div class="dc-fallback" id="dcFallback" aria-label="Defesa Civil de Parobé">
-          <img src="./img/defesa-civil-fallback.svg" alt="" />
-        </div>
-      </div>
-
-      <div>
-        <h1>CENTRAL DE MONITORAMENTO</h1>
-        <p>DEFESA CIVIL DE PAROBÉ</p>
-        <span>Rio Paranhana</span>
-      </div>
-    </div>
-
-    <div class="top-actions">
-      <div class="live-badge" id="liveBadge" data-status="checking">
-        <span class="live-dot"></span>
-        <span>VERIFICANDO</span>
-      </div>
-
-      <div class="top-meta">
-        <i data-lucide="calendar-days"></i>
-        <div>
-          <strong id="header-date">--/--/----</strong>
-          <span id="header-time">--:--</span>
-        </div>
-      </div>
-
-      <div class="top-meta top-meta-update">
-        <i data-lucide="info"></i>
-        <div>
-          <strong>Dados atualizados</strong>
-          <span>a cada 15 minutos</span>
-        </div>
-      </div>
-    </div>
+    <div class="brand municipal"><img src="img/prefeitura-parobe.png" alt="Prefeitura Municipal de Parobé"></div>
+    <div class="divider"></div>
+    <div class="brand monitor"><img src="img/defesa-civil-parobe.svg" alt="Símbolo visual da Defesa Civil de Parobé"><div><strong>CENTRAL DE MONITORAMENTO</strong><small>DEFESA CIVIL DE PAROBÉ<br>Rio Paranhana</small></div></div>
+    <div class="top-status"><span id="systemBadge" class="badge waiting">● AGUARDANDO</span><span class="top-item">◷ <b id="headerDate">--/--/----</b><small id="headerTime">--:--</small></span><span class="top-item">ⓘ <b>Dados atualizados</b><small>a cada 15 minutos</small></span></div>
   </header>
 
-  <main class="dashboard">
-    <div id="integrationStatus" hidden></div>
-
-    <!-- PRIMEIRA LINHA -->
+  <main>
     <section class="hero-grid">
-      <article class="card video-card">
-        <div class="video-shell" id="video-wrapper">
-          <div class="video-tag">
-            <i data-lucide="video"></i>
-            <span>Ponte sobre o Rio Paranhana</span>
-          </div>
-<div class="offline-message-container" id="offline-message-container"></div>
-
-          <iframe
-            id="youtube-transmissison-iframe"
-            title="AO VIVO | Monitoramento Rio Paranhana"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-
-          <div class="video-location">Parobé - RS</div>
-        </div>
-
-        <div class="video-footer">
-          <div class="video-live-info">
-            <span class="status-dot green"></span>
-            <span>Transmissão ao vivo</span>
-          </div>
-          <button class="fullscreen-btn" id="fullscreenBtn" type="button">
-            <i data-lucide="maximize"></i>
-            Tela cheia
-          </button>
-        </div>
+      <article class="camera card dark">
+        <div class="camera-label">▣ Ponte sobre o Rio Paranhana</div>
+        <div id="videoStage" class="video-stage"><div class="unavailable"><strong>TRANSMISSÃO TEMPORARIAMENTE INDISPONÍVEL</strong><span>Não foi possível verificar a câmera neste momento. Tentaremos novamente automaticamente.</span></div></div>
+        <div class="camera-footer"><span><i></i> Transmissão ao vivo</span><button id="fullscreenButton" type="button">⛶ Tela cheia</button></div>
       </article>
 
       <div class="right-top">
-        <article class="card river-main-card" id="riverMainCard">
-          <div class="river-kpi">
-            <p class="eyebrow">NÍVEL ATUAL DO RIO PARANHANA</p>
-            <div class="river-value-row">
-              <strong class="river-value" id="riverLevelValue">--</strong>
-              <span class="river-unit">m</span>
-            </div>
-            <div class="trend" id="riverTrend">
-              <i data-lucide="minus"></i>
-              <span>Aguardando tendência</span>
-            </div>
-          </div>
-
-          <div class="river-status-side">
-            <div class="status-pill status-normal" id="riverStatusPill">
-              <i data-lucide="circle-check-big"></i>
-              <div>
-                <strong id="riverStatusText">AGUARDANDO</strong>
-                <span>Situação do rio</span>
-              </div>
-            </div>
-            <div class="last-update">
-              <span>Última atualização</span>
-              <strong id="lastUpdateVisible">--/--/---- --:--</strong>
-            </div>
-          </div>
+        <article class="level-card card">
+          <div><h2>NÍVEL ATUAL DO RIO PARANHANA</h2><div class="level"><span id="riverLevel">--</span><small>m</small></div><p id="trend">— Aguardando tendência</p></div>
+          <div class="situation"><div id="situationPill" class="pill waiting">✓ <b>AGUARDANDO</b><small>Situação do rio</small></div><p>Última atualização<br><strong id="riverUpdated">--/--/---- --:--</strong></p></div>
         </article>
-
-        <div class="weather-row">
-          <article class="card metric-card">
-            <i data-lucide="thermometer"></i>
-            <span>TEMPERATURA</span>
-            <strong id="temperatureVisible">--°C</strong>
-          </article>
-
-          <article class="card metric-card">
-            <i data-lucide="person-standing"></i>
-            <span>SENSAÇÃO TÉRMICA</span>
-            <strong id="feelsLikeVisible">--°C</strong>
-          </article>
-
-          <article class="card metric-card">
-            <i data-lucide="wind"></i>
-            <span>VENTO</span>
-            <strong id="windVisible">-- km/h</strong>
-          </article>
-
-          <article class="card metric-card metric-direction">
-            <i data-lucide="compass"></i>
-            <span>DIREÇÃO DO VENTO</span>
-            <div class="direction-value">
-              <strong id="windDirectionVisible">--</strong>
-              <span id="windDegreesVisible">(--°)</span>
-            </div>
-          </article>
-
-          <article class="card metric-card rain-card">
-            <i data-lucide="cloud-rain"></i>
-            <span>CHUVA ACUMULADA</span>
-            <strong id="rainVisible">-- mm</strong>
-            <small>últimos 30 dias</small>
-          </article>
+        <div class="metrics">
+          <article class="metric card"><span class="icon">♨</span><h3>TEMPERATURA</h3><strong><span id="temperature">--</span>°C</strong></article>
+          <article class="metric card"><span class="icon">♙</span><h3>SENSAÇÃO TÉRMICA</h3><strong><span id="feelsLike">--</span>°C</strong></article>
+          <article class="metric card"><span class="icon">≋</span><h3>VENTO</h3><strong><span id="windSpeed">--</span> km/h</strong></article>
+          <article class="metric card"><span class="icon">◉</span><h3>DIREÇÃO DO VENTO</h3><strong id="windDirection">--</strong><small id="windDegrees">(--°)</small></article>
+          <article class="metric card"><span class="icon">♧</span><h3>CHUVA ACUMULADA</h3><strong><span id="rainTotal">--</span> mm</strong><small>últimos 30 dias</small></article>
         </div>
-
-        <article class="card system-health-card">
-          <div class="system-health-title">
-            <div>
-              <i data-lucide="activity"></i>
-              <strong>STATUS DO MONITORAMENTO</strong>
-            </div>
-            <span>Atualização automática</span>
-          </div>
-
-          <div class="system-health-grid">
-            <div class="health-item" id="healthCamera">
-              <span class="health-dot waiting"></span>
-              <div><strong>Câmera</strong><small id="healthCameraText">Verificando</small></div>
-            </div>
-            <div class="health-item" id="healthRiver">
-              <span class="health-dot waiting"></span>
-              <div><strong>Dados do rio</strong><small id="healthRiverText">Aguardando</small></div>
-            </div>
-            <div class="health-item" id="healthWeather">
-              <span class="health-dot waiting"></span>
-              <div><strong>Clima</strong><small id="healthWeatherText">Atualizando</small></div>
-            </div>
-          </div>
-
-          <div class="system-health-foot">
-            <i data-lucide="radio-tower"></i>
-            <span>Monitoramento contínuo 24 horas por dia • Departamento de TI</span>
-          </div>
-        </article>
+        <article class="monitor-status card"><div class="status-head"><b>⌁ STATUS DO MONITORAMENTO</b><small>Atualização automática</small></div><div class="status-list"><span><i id="cameraDot" class="dot red"></i><b>Câmera</b><small id="cameraState">Indisponível</small></span><span><i id="riverDot" class="dot amber"></i><b>Dados do rio</b><small id="riverState">Aguardando</small></span><span><i id="weatherDot" class="dot amber"></i><b>Clima</b><small id="weatherState">Aguardando</small></span></div><footer>Monitoramento contínuo 24 horas por dia • Departamento de TI</footer></article>
+        <article class="x-alert card" aria-labelledby="xAlertTitle"><div class="x-alert-head"><div><b id="xAlertTitle">𝕏 AVISOS DA DEFESA CIVIL RS</b><small>Informações oficiais do Estado</small></div><a href="https://x.com/DefesaCivilRS" target="_blank" rel="noopener">Ver no X ↗</a></div><div id="xAlertBody" class="x-alert-body"><p class="x-loading">Buscando o aviso mais recente…</p></div></article>
       </div>
     </section>
 
-    <!-- SEGUNDA LINHA -->
     <section class="lower-grid">
-      <article class="card chart-card">
-        <div class="section-title">
-          <div>
-            <i data-lucide="chart-no-axes-combined"></i>
-            <h2>EVOLUÇÃO DO NÍVEL DO RIO – ÚLTIMAS 24H</h2>
-          </div>
-          <span class="chart-note" id="chartNote">Aguardando leituras</span>
-        </div>
-
-        <div class="chart-layout">
-          <div class="chart-area">
-            <canvas id="riverChart" aria-label="Gráfico de evolução do nível do Rio Paranhana"></canvas>
-          </div>
-
-          <aside class="risk-legend">
-            <h3>FAIXAS DE RISCO</h3>
-
-            <div class="risk-item risk-normal">
-              <span class="risk-icon"><i data-lucide="circle-check"></i></span>
-              <div><strong>NORMAL</strong><small>Até 1,00 m</small></div>
-            </div>
-
-            <div class="risk-item risk-attention">
-              <span class="risk-icon"><i data-lucide="circle-alert"></i></span>
-              <div><strong>ATENÇÃO</strong><small>1,00 m – 2,00 m</small></div>
-            </div>
-
-            <div class="risk-item risk-care">
-              <span class="risk-icon"><i data-lucide="triangle-alert"></i></span>
-              <div><strong>CUIDADO</strong><small>2,00 m – 3,00 m</small></div>
-            </div>
-
-            <div class="risk-item risk-alert">
-              <span class="risk-icon"><i data-lucide="siren"></i></span>
-              <div><strong>ALERTA</strong><small>3,00 m – 5,00 m</small></div>
-            </div>
-
-            <div class="risk-item risk-emergency">
-              <span class="risk-icon"><i data-lucide="octagon-alert"></i></span>
-              <div><strong>EMERGÊNCIA</strong><small>A partir de 5,00 m</small></div>
-            </div>
-          </aside>
-        </div>
-
-        <div class="chart-source">
-          <i data-lucide="info"></i>
-          <span>
-            Escala visual de 0 a 6 m. Ajuste os limites de risco conforme o protocolo oficial da Defesa Civil.
-          </span>
-        </div>
-      </article>
-
-      <div class="right-lower">
-        <article class="card location-card">
-          <div class="section-title compact">
-            <div>
-              <i data-lucide="map-pin"></i>
-              <h2>LOCALIZAÇÃO E INFORMAÇÕES</h2>
-            </div>
-          </div>
-
-          <div class="location-content">
-            <div class="location-text">
-              <p>
-                <i data-lucide="map-pinned"></i>
-                <span><strong>Local:</strong> Ponte sobre o Rio Paranhana – Parobé/RS</span>
-              </p>
-              <p>
-                <i data-lucide="radio-tower"></i>
-                <span><strong>Transmissão:</strong> 24h / 7 dias por semana</span>
-              </p>
-              <p class="info-note">
-                <i data-lucide="info"></i>
-                <span>
-                  As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas oficiais,
-                  consulte sempre a Defesa Civil.
-                </span>
-              </p>
-            </div>
-
-            <div class="map-box">
-              <iframe
-                title="Mapa - Ponte sobre o Rio Paranhana"
-                loading="lazy"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-50.8070%2C-29.6480%2C-50.7950%2C-29.6390&layer=mapnik&marker=-29.64357476725393%2C-50.800925760328184"
-              ></iframe>
-              <div class="coordinates">
-                <strong>Coordenadas:</strong>
-                <span>-29.64357476725393,</span>
-                <span>-50.800925760328184</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card emergency-card">
-          <div class="emergency-title">
-            <i data-lucide="phone-call"></i>
-            <h2>EM CASO DE EMERGÊNCIA, LIGUE</h2>
-          </div>
-
-          <div class="emergency-grid">
-            <a class="emergency-item" href="https://wa.me/5551991384714" target="_blank" rel="noopener noreferrer">
-              <span>DEFESA CIVIL</span>
-              <strong>(51) 99138-4714</strong>
-              <small>WhatsApp</small>
-            </a>
-
-            <a class="emergency-item" href="tel:193">
-              <span>BOMBEIROS</span>
-              <strong>193</strong>
-              <small>Emergência</small>
-            </a>
-
-            <a class="emergency-item" href="tel:190">
-              <span>BRIGADA MILITAR</span>
-              <strong>190</strong>
-              <small>Emergência</small>
-            </a>
-          </div>
-        </article>
-      </div>
+      <article class="chart-card card"><div class="section-title"><h2>⌁ EVOLUÇÃO DO NÍVEL DO RIO – ÚLTIMAS 24H</h2><small id="chartState">Aguardando histórico real</small></div><div class="chart-layout"><div id="chart" class="chart" aria-label="Gráfico do nível do rio nas últimas 24 horas"></div><aside class="risk"><b>NÍVEIS DE REFERÊNCIA</b><span class="normal">✓ <strong>NORMAL</strong><small>1,00 m</small></span><span class="attention">△ <strong>ATENÇÃO</strong><small>2,00 m</small></span><span class="alert">! <strong>ALERTA</strong><small>3,50 m</small></span><span class="flood">≋ <strong>ALERTA DE INUNDAÇÃO</strong><small>Após 4,50 m</small></span><span class="extreme">⌂ <strong>INUNDAÇÃO EXTREMA</strong><small>6,00 m</small></span></aside></div><footer>ⓘ Níveis de referência adotados pela Defesa Civil de Parobé.</footer></article>
+      <div class="info-column"><article class="info card"><h2>⌖ LOCALIZAÇÃO E INFORMAÇÕES</h2><div class="info-body"><div><p><b>⌖ Local:</b> Ponte sobre o Rio Paranhana – Parobé/RS</p><p><b>♒ Transmissão:</b> 24h / 7 dias por semana</p><p>ⓘ As imagens dependem da estabilidade da internet local. Para dados técnicos e réguas oficiais, consulte sempre a Defesa Civil.</p><p><b>Coordenadas:</b><br>-29.64357476725393, -50.800925760328184</p></div><a class="map" href="https://www.openstreetmap.org/?mlat=-29.64357476725393&mlon=-50.800925760328184#map=17/-29.64357/-50.80093" target="_blank" rel="noopener">⌖<small>Abrir localização</small></a></div></article><article class="emergency-box card"><h2>☎ EM CASO DE EMERGÊNCIA, LIGUE</h2><div><span><b>DEFESA CIVIL</b><strong>(51) 99138-4714</strong><small>WhatsApp</small></span><span><b>BOMBEIROS</b><strong>193</strong><small>Emergência</small></span><span><b>BRIGADA MILITAR</b><strong>190</strong><small>Emergência</small></span></div></article></div>
     </section>
   </main>
-
-  <footer class="site-footer">
-    <div>
-      <i data-lucide="shield-check"></i>
-      <span>Monitoramento oficial da Prefeitura Municipal de Parobé em parceria com a Defesa Civil.</span>
-    </div>
-
-    <div class="footer-dev">
-      <i data-lucide="monitor-cog"></i>
-      <strong>Monitoramento desenvolvido pelo Departamento de TI.</strong>
-    </div>
-
-    <div>
-      <i data-lucide="triangle-alert"></i>
-      <span>Em caso de emergência, siga as orientações das autoridades.</span>
-    </div>
-  </footer>
-
-  <!-- ==========================================================
-       ÁREA DE COMPATIBILIDADE
-       Os scripts já existentes no site continuam alimentando estes
-       IDs. O front-rio.js espelha os valores no novo layout.
-       ========================================================== -->
-  <div id="legacy-compat" aria-hidden="true">
-    <div id="noc"></div>
-    <div id="temp-atual"><span id="TempAtual"></span></div>
-    <div id="sens-term"><span id="SensTerm"></span></div>
-    <div id="velo-vento"><span id="VeloVento"></span></div>
-    <div id="dire-vento"><img id="compass-needle" alt="" /></div>
-
-    <span id="NivelRio"></span>
-
-    <div id="noc-prec">
-      <div id="noc-meter">
-        <div id="api-rain-fill"></div>
-        <span id="api-rain-current-val"></span>
-        <strong id="api-rain-month-label"></strong>
-      </div>
-    </div>
-
-    <div id="noc-regua-container">
-      <span id="api-last-update">--/-- --:--</span>
-      <div id="api-river-indicator">
-        <span id="api-nivel-atual"></span>
-      </div>
-      <div id="api-river-fill"></div>
-    </div>
-  </div>
-
-  <!-- Scripts que já existem no site atual e devem ser mantidos -->
-  <script src="./js/script.js"></script>
-  <script src="./js/dadosRio.js"></script>
-
-  <!-- Nova transmissão corrigida -->
-  <script src="./js/transmissao.js" type="module"></script>
-
-  <!-- Integração visual do novo front -->
-  <script src="./js/front-rio-v4.js"></script>
+  <footer class="page-footer"><b>▣ Monitoramento desenvolvido pelo Departamento de TI.</b><span>△ Em caso de emergência, siga as orientações das autoridades.</span></footer>
+  <script src="js/front-rio-v5.js" defer></script><script src="js/transmissao.js" defer></script>
 </body>
 </html>
